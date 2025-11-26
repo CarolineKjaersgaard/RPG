@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 namespace API;
 
 [ApiController]
 [Route("[controller]")]
-public class GameAPI : IGameAPI
+public class GameAPI : ControllerBase, IGameAPI
 {
     private IGame game;
 
@@ -15,7 +16,8 @@ public class GameAPI : IGameAPI
     [HttpPost(Name = "StartGame")]
     public IActionResult StartGame()
     {
-        throw new NotImplementedException();
+        (bool, object) res = game.StartGame();
+        return Ok(res);
     }
 
     [HttpGet(Name = "EnterRoom")]
