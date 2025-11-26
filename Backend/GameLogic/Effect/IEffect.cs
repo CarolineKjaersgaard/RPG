@@ -7,5 +7,6 @@ namespace Backend.GameLogic.Effect
         public bool ApplyEffect(IEntity target);
 
         public void RemoveEffect();
+
     }
 }

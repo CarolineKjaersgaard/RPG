@@ -13,7 +13,7 @@ public interface IGame
 
     public List<IItem> LootCurrentRoom();
 
-    public List<IEntity> ExecuteEffect(string Effect);
+    public List<IEntity> ExecuteEffect(string Effect, string target);
 
     public IPlayer EndEffect(string Effect);
 
