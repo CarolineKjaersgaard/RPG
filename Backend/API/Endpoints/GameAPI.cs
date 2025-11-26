@@ -12,7 +12,7 @@ public class GameAPI : IGameAPI
         this.game = game;
     }
 
-    [HttpGet(Name = "StartGame")]
+    [HttpPost(Name = "StartGame")]
     public IActionResult StartGame()
     {
         throw new NotImplementedException();
@@ -24,13 +24,13 @@ public class GameAPI : IGameAPI
         throw new NotImplementedException();
     }
 
-    [HttpGet(Name = "ExecuteEffect")]
+    [HttpPost(Name = "ExecuteEffect")]
     public IActionResult ExecuteEffect(string effect)
     {
         throw new NotImplementedException();
     }
 
-    [HttpGet(Name = "EndEffect")]
+    [HttpDelete(Name = "EndEffect")]
     public IActionResult EndEffect(string effect)
     {
         throw new NotImplementedException();
@@ -42,7 +42,7 @@ public class GameAPI : IGameAPI
         throw new NotImplementedException();
     }
 
-    [HttpGet(Name = "EndGame")]
+    [HttpDelete(Name = "EndGame")]
     public IActionResult EndGame()
     {
         throw new NotImplementedException();
