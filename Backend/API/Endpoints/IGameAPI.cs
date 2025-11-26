@@ -1,4 +1,4 @@
-
+using Microsoft.AspNetCore.Mvc;
 public interface IGameAPI
 {
     public IActionResult StartGame();
