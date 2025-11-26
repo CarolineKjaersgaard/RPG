@@ -23,30 +23,35 @@ public class GameAPI : ControllerBase, IGameAPI
     [HttpGet(Name = "EnterRoom")]
     public IActionResult EnterRoom(int x, int y)
     {
-        throw new NotImplementedException();
-    }
-
-    [HttpPost(Name = "ExecuteEffect")]
-    public IActionResult ExecuteEffect(string effect)
-    {
-        throw new NotImplementedException();
-    }
-
-    [HttpDelete(Name = "EndEffect")]
-    public IActionResult EndEffect(string effect)
-    {
-        throw new NotImplementedException();
+        (object, bool) res = game.EnterRoom((x, y));
+        return Ok(res);
     }
 
     [HttpGet(Name = "LootCurrentRoom")]
     public IActionResult LootCurrentRoom()
     {
-        throw new NotImplementedException();
+        List<object> res = game.LootCurrentRoom();
+        return Ok(res);
+    }
+
+    [HttpPost(Name = "ExecuteEffect")]
+    public IActionResult ExecuteEffect(string effect)
+    {
+        List<Object> res = game.ExecuteEffect(effect);
+        return Ok(res);
+    }
+
+    [HttpDelete(Name = "EndEffect")]
+    public IActionResult EndEffect(string effect)
+    {
+        object res = game.EndEffect(effect);
+        return Ok(res);
     }
 
     [HttpDelete(Name = "EndGame")]
     public IActionResult EndGame()
     {
-        throw new NotImplementedException();
+        game.EndGame();
+        return Ok();
     }
 }
