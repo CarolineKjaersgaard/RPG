@@ -56,10 +56,12 @@ html {
     margin: var(--margin-standard);
 }
 
-input[type=checkbox] > label.inventoryCheckBox {
+input[type=checkbox]#inventoryCheckBox > label.inventoryCheckBox {
+    /* Inventory hidden */
 }
 
-input[type=checkbox]:checked > label.inventoryCheckBox {
+input[type=checkbox]#inventoryCheckBox:checked > label.inventoryCheckBox {
+    /* Inventory visible */
 }
 
 .mainContainer {
