@@ -24,7 +24,10 @@ namespace Backend.GameLogic.Player
 
         public bool ExecuteEffect(string effect, IEntity target)
         {
-            throw new NotImplementedException();
+            if(effects.ContainsKey(effect))
+            {
+
+            }
         }
     }
 }

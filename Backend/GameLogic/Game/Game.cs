@@ -28,7 +28,9 @@ namespace Backend.GameLogic.Game
 
         public void EndGame()
         {
-            throw new NotImplementedException();
+            map.Clear();
+            currentRoom = null;
+            player = new PlayerImpl();
         }
 
         public (IRoom, bool) EnterRoom((int, int) coords)
