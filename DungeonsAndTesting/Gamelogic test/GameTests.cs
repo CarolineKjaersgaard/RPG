@@ -1,5 +1,6 @@
 ﻿using Backend.GameLogic.Game;
 using Backend.GameLogic.Player;
+using DungeonsAndTesting.Gamelogic_test.Mocks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,13 @@ namespace DungeonsAndTesting.Gamelogic_test
     {
         private Game game;
         private IPlayer player; 
+        private IDatabase database;
 
         public GameTests() 
         {
             player = new PlayerImpl();
-            game = new Game(player);
+            database = new TestDatabase();
+            game = new Game(player, database);
         }
 
         [Fact]
