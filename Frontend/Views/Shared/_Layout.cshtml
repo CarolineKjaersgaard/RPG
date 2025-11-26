@@ -10,20 +10,21 @@
     <link rel="stylesheet" href="~/Frontend.styles.css" asp-append-version="true" />
 </head>
 <body style="background-color:black; color:white">
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Frontend - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <input type="checkbox" id="inventoryCheckBox" />
+    <label for="inventoryCheckBox" class="inventoryCheckBox">
+        <div>
+            @await RenderSectionAsync("Inventory.cshtml")
         </div>
-    </footer>
+    </label>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
