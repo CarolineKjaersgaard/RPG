@@ -1,10 +1,12 @@
-﻿namespace Backend.GameLogic.Room
+﻿using Backend.Database.Tables;
+
+namespace Backend.GameLogic
 {
     public class RoomFactory : IRoomFactory
     {
         public IRoom CreateRoom(ITable roomStats)
         {
-            throw new NotImplementedException();
+            return new RoomImpl();
         }
     }
 }

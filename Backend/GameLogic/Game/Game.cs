@@ -1,7 +1,8 @@
-﻿using Backend.GameLogic.Entity;
+﻿using Backend.Database.DatabaseHandlers;
+using Backend.Database.Tables;
+using Backend.GameLogic.Entity;
 using Backend.GameLogic.Item;
 using Backend.GameLogic.Player;
-using Backend.GameLogic.Room;
 
 namespace Backend.GameLogic.Game
 {
@@ -71,7 +72,7 @@ namespace Backend.GameLogic.Game
 
         private IRoom CreateRoom((int, int) coords)
         {
-            List<ITable> rooms = database.GetItems<ITable>("", "");
+            List<Room> rooms = database.GetItems<Room>("", "");
             int chosenRoom = rnd.Next(0, rooms.Count);
             ITable roomStats = rooms[chosenRoom];
             RoomFactory roomFactory = new RoomFactory();
