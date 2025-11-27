@@ -17,6 +17,23 @@ namespace Backend.GameLogic.Entity
         List<IItem> loot = new List<IItem>();
         List<IItem> weapon = new List<IItem>();
         Dictionary<string, IEffect> effects = new Dictionary<string, IEffect>();
+
+        public EntityImpl(string type, int health, string name, int damageMod, string title, string desc, string icon, int damageReduction, List<IItem> items)
+        {
+            this.type = type;
+            this.health = health;
+            this.name = name;
+            this.damageMod = damageMod;
+            this.title = title;
+            Desc = desc;
+            this.icon = icon;
+            this.damageReduction = damageReduction;
+            foreach(IItem item in items)
+            {
+                AddItem(item);
+            }
+        }
+
         public void AddItem(IItem item)
         {
             if(item.GetType() == "weapon")
