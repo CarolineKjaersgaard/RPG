@@ -6,6 +6,7 @@ namespace Backend.GameLogic.Entity
     public class EntityImpl : IEntity
     {
         string type;
+        int health;
         string name;
         int damageMod;
         string title;
@@ -56,22 +57,22 @@ namespace Backend.GameLogic.Entity
 
         public List<string> GetEffectNames()
         {
-            throw new NotImplementedException();
+            return effects.Keys.ToList();
         }
 
         public int GetHealth()
         {
-            throw new NotImplementedException();
+            return health;
         }
 
         public List<IItem> GetItems()
         {
-            throw new NotImplementedException();
+            return loot;
         }
 
         public string GetName()
         {
-            throw new NotImplementedException();
+            return title;
         }
     }
 }
