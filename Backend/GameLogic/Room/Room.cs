@@ -10,18 +10,23 @@ namespace Backend.GameLogic
         string title;
         bool isUnlocked;
         string desc;
-        /// <summary>
-        /// 0 = no door
-        /// 1 = closed door
-        /// 2 = open door
-        /// </summary>
-        Dictionary<(int, int), int> doors = new Dictionary<(int, int), int>();
+        Dictionary<(int, int), bool> doors = new Dictionary<(int, int), bool>();
         (int, int) entryDoor = (0,0);
-        IEffect effect;
+        IEffect? effect;
         string image;
         List<IEntity> monsters = new List<IEntity>();
         List<IItem> items = new List<IItem>();
         (int, int) coords;
+
+        public RoomImpl(string title, bool isUnlocked, string desc, string image, (int, int) coords)
+        {
+            this.title = title;
+            this.isUnlocked = isUnlocked;
+            this.desc = desc;
+            this.image = image;
+            this.coords = coords;
+        }
+
         public List<IItem> GetItems()
         {
             return items;
@@ -37,7 +42,7 @@ namespace Backend.GameLogic
             (int, int) index = (playerCoords.Item1 - coords.Item1, playerCoords.Item2 - coords.Item2);
             if(doors.ContainsKey(index))
             {
-                
+                entryDoor = index;
             }
         }
     }

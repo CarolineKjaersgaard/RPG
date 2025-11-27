@@ -1,4 +1,4 @@
-﻿using Backend.Database.DatabaseHandlers;
+﻿using Backend.Database;
 using Backend.Database.Tables;
 using Backend.GameLogic.Entity;
 using Backend.GameLogic.Item;
@@ -49,7 +49,8 @@ namespace Backend.GameLogic.Game
             }
             else
             {
-                room = CreateRoom(coords);
+                List<Room> rooms = database.GetItems<Room>("", "");
+                room = CreateRoom(player.GetCoords(), rooms);
             }
             bool containsMonsters = false;
             List<IEntity> monsters = room.GetMonsters();
@@ -70,11 +71,10 @@ namespace Backend.GameLogic.Game
             return (room, containsMonsters);
         }
 
-        private IRoom CreateRoom((int, int) coords)
+        private IRoom CreateRoom((int, int) coords, List<Room> rooms)
         {
-            List<Room> rooms = database.GetItems<Room>("", "");
             int chosenRoom = rnd.Next(0, rooms.Count);
-            ITable roomStats = rooms[chosenRoom];
+            Room roomStats = rooms[chosenRoom];
             RoomFactory roomFactory = new RoomFactory();
             IRoom room = roomFactory.CreateRoom(roomStats);
             map.Add(coords, room);
@@ -143,7 +143,11 @@ namespace Backend.GameLogic.Game
 
         public (bool, IPlayer) StartGame()
         {
-            CreateRoom(player.GetCoords());
+            List<Room> rooms = database.GetItems<Room>("", "");
+            if(rooms.Count > 0)
+            {
+                CreateRoom(player.GetCoords(), rooms);
+            }
             return (true, player);
         }
     }
