@@ -15,17 +15,19 @@ namespace Backend.GameLogic.Entity
         List<IItem> buffs = new List<IItem>();
         List<IItem> loot = new List<IItem>();
         List<IItem> weapon = new List<IItem>();
-        Dictionary<string, IEffect> activeEffects = new Dictionary<string, IEffect>();
+        Dictionary<string, IEffect> effects = new Dictionary<string, IEffect>();
         public void AddItem(IItem item)
         {
             if(item.GetType() == "weapon")
             {
-                weapon.Add(item);       
+                weapon.Add(item);
+                effects.Add(item.GetName(), item.GetEffect());       
             }
             if(item.GetEffect().IsPassive())
             {
                 buffs.Add(item);
                 item.GetEffect().ApplyEffect(this);
+                effects.Add(item.GetName(), item.GetEffect());
             }
             if(item.CanBeLooted())
             {
@@ -35,9 +37,9 @@ namespace Backend.GameLogic.Entity
 
         public bool EndEffect(string effect)
         {
-            if(activeEffects.ContainsKey(effect))
+            if(effects.ContainsKey(effect))
             {
-                activeEffects[effect].RemoveEffect();
+                effects[effect].RemoveEffect();
                 return true;
             }
             return false;
@@ -45,7 +47,11 @@ namespace Backend.GameLogic.Entity
 
         public bool ExecuteEffect(string effect, IEntity target)
         {
-            throw new NotImplementedException();
+            if(effects.ContainsKey(effect))
+            {
+                return effects[effect].ApplyEffect(target);
+            }
+            return false;
         }
 
         public List<string> GetEffectNames()
