@@ -13,7 +13,7 @@ namespace Backend.GameLogic.Player
         private Dictionary<string, IEffect> effects = new Dictionary<string, IEffect>();
         private List<IItem> inventory = new List<IItem>();
         private (int, int) currentCoords = (0, 0);
-        private string name;
+        private string name = "player";
         public int Health { get => health; private set => health = value; }
         public int Defense { get => defense; private set => defense = value; }
         public int BaseAttackMod { get => baseAttackMod; private set => baseAttackMod = value; }
