@@ -5,5 +5,7 @@ namespace Backend.GameLogic.Item
     public interface IItem
     {
         public IEffect GetEffect();
+
+        public bool CanBeLooted();
     }
 }

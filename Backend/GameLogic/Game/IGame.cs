@@ -3,7 +3,7 @@
 using Backend.GameLogic.Entity;
 using Backend.GameLogic.Item;
 using Backend.GameLogic.Player;
-using Backend.GameLogic.Room;
+using Backend.GameLogic;
 
 public interface IGame
 {

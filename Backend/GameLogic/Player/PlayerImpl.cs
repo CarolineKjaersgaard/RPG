@@ -58,6 +58,11 @@ namespace Backend.GameLogic.Player
             return health;
         }
 
+        public List<IItem> GetItems()
+        {
+            return inventory;
+        }
+
         public string GetName()
         {
             return name;
