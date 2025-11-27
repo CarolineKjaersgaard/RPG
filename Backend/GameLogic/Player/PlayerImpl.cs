@@ -9,6 +9,7 @@ namespace Backend.GameLogic.Player
     public class PlayerImpl:IPlayer
     {
         private int health = 10;
+        private int maxHealth = 10;
         private int defense = 15;
         private int baseAttackMod = 2;
         private int baseDamageMod = 2;
@@ -77,9 +78,28 @@ namespace Backend.GameLogic.Player
             return inventory;
         }
 
+        public int GetMaxHealth()
+        {
+            return maxHealth;
+        }
+
         public string GetName()
         {
             return name;
+        }
+
+        public void UpdateHealth(int amount)
+        {
+            health -= amount;
+            if(health > maxHealth)
+            {
+                health = maxHealth;
+            }
+        }
+
+        public void UpdateMaxHealth(int amount)
+        {
+            maxHealth += amount;
         }
     }
 }

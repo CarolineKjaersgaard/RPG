@@ -13,6 +13,11 @@ namespace Backend.GameLogic.Entity
 
         public int GetHealth();
 
+        public void UpdateHealth(int amount);
+
+        public int GetMaxHealth();
+        public void UpdateMaxHealth(int amount);
+
         public void AddItem(IItem item);
         List<IItem> GetItems();
     }
