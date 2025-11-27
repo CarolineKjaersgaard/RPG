@@ -14,5 +14,6 @@ namespace Backend.GameLogic.Entity
         public int GetHealth();
 
         public void AddItem(IItem item);
+        List<IItem> GetItems();
     }
 }

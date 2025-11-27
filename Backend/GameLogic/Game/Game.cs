@@ -64,7 +64,12 @@ namespace Backend.GameLogic.Game
 
         private IRoom CreateRoom((int, int) coords)
         {
-            return null;
+            List<ITable> rooms = database.GetItems<ITable>("", "");
+            int chosenRoom = rnd.Next(0, rooms.Count);
+            ITable roomStats = rooms[chosenRoom];
+            RoomFactory roomFactory = new RoomFactory();
+            IRoom room = roomFactory.CreateRoom(roomStats);
+            return room;
         }
 
         public List<IEntity> ExecuteEffect(string effect, string target)
@@ -93,7 +98,26 @@ namespace Backend.GameLogic.Game
 
         public List<IItem> LootCurrentRoom()
         {
-            throw new NotImplementedException();
+            List<IItem> items = currentRoom.GetItems();
+            
+            foreach(IEntity monster in currentRoom.GetMonsters())
+            {
+                List<IItem> monsterItems = monster.GetItems();
+                foreach(IItem  item in monsterItems)
+                {
+                    if(item.CanBeLooted())
+                    {
+                        items.Add(item);
+                    }
+                }
+                monster.GetItems().Clear();
+            }
+            foreach(IItem item in items)
+            {
+                player.AddItem(item);
+            }
+            currentRoom.GetItems().Clear();
+            return items;
         }
 
 
