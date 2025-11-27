@@ -16,6 +16,7 @@ public class GameAPI : ControllerBase, IGameAPI
     [HttpPost(Name = "StartGame")]
     public IActionResult StartGame()
     {
+        //object needs to be a specified model class
         (bool, object) res = game.StartGame();
         return Ok(res);
     }
