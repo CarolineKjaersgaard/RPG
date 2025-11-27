@@ -18,4 +18,6 @@
         Are you prepared to face what waits in this cosmic graveyard?
     </p>
 </div>
-<button style="margin: 0 auto" class="game-action-button">Start Game</button>
+<form asp-controller="Game" asp-action="Start" method="post">
+    <button type="submit" style="margin: 0 auto" class="game-action-button">Start Game</button>
+</form>
