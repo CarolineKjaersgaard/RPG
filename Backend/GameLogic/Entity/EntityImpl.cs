@@ -51,7 +51,7 @@ namespace Backend.GameLogic.Entity
                 }
                 passiveEffect.ApplyEffect(this);
             }
-            if(item.GetType() == "weapon")
+            if(item.GetItemType() == "weapon")
             {
                 weapon.Add(item);     
             }

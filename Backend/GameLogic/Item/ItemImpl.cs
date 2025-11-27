@@ -10,43 +10,65 @@ namespace Backend.GameLogic.Item
         string description;
         int rarity;
         string icon;
-        string type;
-        IEffect effect;
+        string itemType;
+        List<IActiveEffect> activeEffects = new List<IActiveEffect>();
+        List<IPassiveEffect> passiveEffects = new List<IPassiveEffect>();
         bool isLootable;
+
+        public ItemImpl(string title, string description, int rarity, string icon, string itemType, bool isLootable, List<IEffect> effects)
+        {
+            Title = title;
+            this.description = description;
+            this.rarity = rarity;
+            this.icon = icon;
+            this.itemType = itemType;
+            this.isLootable = isLootable;
+            foreach(IEffect effect in effects)
+            {
+                if(effect.GetType() == typeof(IActiveEffect))
+                {
+                    activeEffects.Add((IActiveEffect)effect);
+                }
+                else if(effect.GetType() == typeof(IPassiveEffect))
+                {
+                    passiveEffects.Add((IPassiveEffect)effect);
+                }
+            }
+        }
 
         public bool CanBeLooted()
         {
-            throw new NotImplementedException();
+            return isLootable;
         }
 
         public List<IActiveEffect> GetActiveEffects()
         {
-            throw new NotImplementedException();
+            return activeEffects;
         }
 
         public string GetName()
         {
-            throw new NotImplementedException();
+            return Title;
         }
 
         public List<IPassiveEffect> GetPassiveEffects()
         {
-            throw new NotImplementedException();
+            return passiveEffects;
         }
 
         public bool HasActiveEffect()
         {
-            throw new NotImplementedException();
+            return activeEffects.Count > 0;
         }
 
         public bool HasPassiveEffect()
         {
-            throw new NotImplementedException();
+            return passiveEffects.Count > 0;
         }
 
-        string IItem.GetType()
+        public string GetItemType()
         {
-            throw new NotImplementedException();
+            return itemType;
         }
     }
 }

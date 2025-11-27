@@ -13,7 +13,7 @@ namespace Backend.GameLogic.Item
         public bool HasPassiveEffect();
         public bool CanBeLooted();
 
-        public string GetType();
+        public string GetItemType();
 
     }
 }
