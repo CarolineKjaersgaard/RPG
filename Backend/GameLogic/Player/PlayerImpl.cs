@@ -13,7 +13,7 @@ namespace Backend.GameLogic.Player
         private Dictionary<string, IEffect> effects = new Dictionary<string, IEffect>();
         private List<IItem> inventory = new List<IItem>();
         private (int, int) currentCoords = (0, 0);
-        private string name;
+        private string name = "player";
         public int Health { get => health; private set => health = value; }
         public int Defense { get => defense; private set => defense = value; }
         public int BaseAttackMod { get => baseAttackMod; private set => baseAttackMod = value; }
@@ -25,20 +25,28 @@ namespace Backend.GameLogic.Player
         public void AddItem(IItem item)
         {
             inventory.Add(item);
-            //ExecuteEffect(item.GetEffect(), this);
+            effects.Add(item.GetName(), item.GetEffect());
+            if(item.GetEffect().IsPassive())
+            {
+                item.GetEffect().ApplyEffect(this);
+            }
         }
 
         public bool EndEffect(string effect)
         {
-            throw new NotImplementedException();
+            if(effects.ContainsKey(effect))
+            {
+                effects[effect].RemoveEffect();
+                return true;
+            }
+            return false;
         }
 
         public bool ExecuteEffect(string effect, IEntity target)
         {
             if(effects.ContainsKey(effect))
             {
-                Effects[effect].ApplyEffect(target);
-                return true;
+                return Effects[effect].ApplyEffect(target);
             }
             return false;
         }
