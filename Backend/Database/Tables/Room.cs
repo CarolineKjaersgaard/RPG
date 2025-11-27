@@ -1,9 +1,13 @@
-using Backend.Database.Tables;
+using System;
+using System.Data;
 
-public class Room : ITable
+namespace Backend.Database.Tables {
+    public class Room : ITable
 {
-    public string Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public string Title { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public string Id { get; set; }
+    public string Title { get; set; }
+    public int Rarity {get; set;}
+    
 
     public List<string> GetCollumns()
     {
@@ -14,4 +18,5 @@ public class Room : ITable
     {
         throw new NotImplementedException();
     }
+}
 }
