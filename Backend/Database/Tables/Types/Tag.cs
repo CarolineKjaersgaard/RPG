@@ -11,15 +11,7 @@ namespace Backend.Database.Tables {
     {
         return new List<string>
         {
-            Id, Title
-        };
-    }
-
-    public List<string> GetValues()
-    {
-        return new List<string>
-        {
-          "Id", "Title"  
+            "Id", "Title" 
         };
     }
 }

@@ -2,7 +2,7 @@ using System;
 using System.Data;
 
 namespace Backend.Database.Tables {
-    public class EnemyType : ITable
+    public class TargetType : ITable
 {
     public string Id { get; set; }
     public string Title { get; set; }
@@ -11,8 +11,9 @@ namespace Backend.Database.Tables {
     {
         return new List<string>
         {
-            "Id", "Title" 
+           "Id", "Title" 
         };
     }
+
 }
 }
