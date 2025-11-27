@@ -20,5 +20,17 @@ namespace Backend.GameLogic.Entity
 
         public void AddItem(IItem item);
         List<IItem> GetItems();
+
+        public void SetLastAction(string action);
+
+        public int GetAttackMod();
+
+        public void UpdateAttackMod(int amount);
+
+        public int GetDefense();
+        public void UpdateDefense(int amount);
+
+        public int GetDamageMod();
+        public void UpdateDamageMod(int amount);
     }
 }
