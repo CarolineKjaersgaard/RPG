@@ -20,7 +20,7 @@ public class GameAPI : ControllerBase, IGameAPI
         return Ok(res);
     }
 
-    [HttpGet(Name = "EnterRoom")]
+    /*[HttpGet(Name = "EnterRoom")]
     public IActionResult EnterRoom(int x, int y)
     {
         (object, bool) res = game.EnterRoom((x, y));
@@ -53,5 +53,5 @@ public class GameAPI : ControllerBase, IGameAPI
     {
         game.EndGame();
         return Ok();
-    }
+    }*/
 }
