@@ -1,4 +1,6 @@
 ﻿using Backend.GameLogic.Effect;
+using Backend.GameLogic.Effect.ActiveEffect;
+using Backend.GameLogic.Effect.PassiveEffect;
 using Backend.GameLogic.Entity;
 using Backend.GameLogic.Item;
 
@@ -25,10 +27,14 @@ namespace Backend.GameLogic.Player
         public void AddItem(IItem item)
         {
             inventory.Add(item);
-            effects.Add(item.GetName(), item.GetEffect());
-            if(item.GetEffect().IsPassive())
+            foreach(IActiveEffect activeEffect in item.GetActiveEffects())
             {
-                item.GetEffect().ApplyEffect(this);
+                effects.Add(activeEffect.GetName(), activeEffect);
+            }
+            foreach(IPassiveEffect passiveEffect in item.GetPassiveEffects())
+            {
+                effects.Add(passiveEffect.GetName(), passiveEffect);
+                passiveEffect.ApplyEffect(this);
             }
         }
 
