@@ -34,15 +34,19 @@ namespace Backend.GameLogic.Player
 
         public bool EndEffect(string effect)
         {
-            throw new NotImplementedException();
+            if(effects.ContainsKey(effect))
+            {
+                effects[effect].RemoveEffect();
+                return true;
+            }
+            return false;
         }
 
         public bool ExecuteEffect(string effect, IEntity target)
         {
             if(effects.ContainsKey(effect))
             {
-                Effects[effect].ApplyEffect(target);
-                return true;
+                return Effects[effect].ApplyEffect(target);
             }
             return false;
         }
