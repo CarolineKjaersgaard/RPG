@@ -1,9 +1,11 @@
 
+using Microsoft.AspNetCore.Mvc;
+
 public interface IGameAPI
 {
     public IActionResult StartGame();
 
-    public IActionResult EnterRoom(int x, int y);
+    /*public IActionResult EnterRoom(int x, int y);
 
     public IActionResult LootCurrentRoom();
 
@@ -11,5 +13,5 @@ public interface IGameAPI
 
     public IActionResult EndEffect(string effect);
 
-    public IActionResult EndGame();
+    public IActionResult EndGame();*/
 }

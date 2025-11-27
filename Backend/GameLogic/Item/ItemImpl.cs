@@ -1,0 +1,74 @@
+using Backend.GameLogic.Effect;
+using Backend.GameLogic.Effect.ActiveEffect;
+using Backend.GameLogic.Effect.PassiveEffect;
+
+namespace Backend.GameLogic.Item
+{
+    public class ItemImpl : IItem
+    {
+        string Title;
+        string description;
+        int rarity;
+        string icon;
+        string itemType;
+        List<IActiveEffect> activeEffects = new List<IActiveEffect>();
+        List<IPassiveEffect> passiveEffects = new List<IPassiveEffect>();
+        bool isLootable;
+
+        public ItemImpl(string title, string description, int rarity, string icon, string itemType, bool isLootable, List<IEffect> effects)
+        {
+            Title = title;
+            this.description = description;
+            this.rarity = rarity;
+            this.icon = icon;
+            this.itemType = itemType;
+            this.isLootable = isLootable;
+            foreach(IEffect effect in effects)
+            {
+                if(effect.GetType() == typeof(IActiveEffect))
+                {
+                    activeEffects.Add((IActiveEffect)effect);
+                }
+                else if(effect.GetType() == typeof(IPassiveEffect))
+                {
+                    passiveEffects.Add((IPassiveEffect)effect);
+                }
+            }
+        }
+
+        public bool CanBeLooted()
+        {
+            return isLootable;
+        }
+
+        public List<IActiveEffect> GetActiveEffects()
+        {
+            return activeEffects;
+        }
+
+        public string GetName()
+        {
+            return Title;
+        }
+
+        public List<IPassiveEffect> GetPassiveEffects()
+        {
+            return passiveEffects;
+        }
+
+        public bool HasActiveEffect()
+        {
+            return activeEffects.Count > 0;
+        }
+
+        public bool HasPassiveEffect()
+        {
+            return passiveEffects.Count > 0;
+        }
+
+        public string GetItemType()
+        {
+            return itemType;
+        }
+    }
+}
