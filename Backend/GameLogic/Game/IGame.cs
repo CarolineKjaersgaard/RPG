@@ -1,16 +1,21 @@
 
 
+using Backend.GameLogic.Entity;
+using Backend.GameLogic.Item;
+using Backend.GameLogic.Player;
+using Backend.GameLogic;
+
 public interface IGame
 {
-    public (bool, object) StartGame();
+    public (bool, IPlayer) StartGame();
 
-    public (object, bool) EnterRoom((int, int) coords);
+    public (IRoom, bool) EnterRoom((int, int) coords);
 
-    public List<object> LootCurrentRoom();
+    public List<IItem> LootCurrentRoom();
 
-    public List<object> ExecuteEffect(string Effect);
+    public List<IEntity> ExecuteEffect(string Effect, string target);
 
-    public object EndEffect(string Effect);
+    public IPlayer EndEffect(string Effect);
 
     public void EndGame();
 }
