@@ -7,5 +7,8 @@ namespace Backend.GameLogic.Item
         public IEffect GetEffect();
 
         public bool CanBeLooted();
+
+        public string GetType();
+        
     }
 }
