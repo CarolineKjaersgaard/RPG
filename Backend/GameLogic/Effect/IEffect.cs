@@ -9,6 +9,6 @@ namespace Backend.GameLogic.Effect
         public void RemoveEffect();
 
         public bool IsPassive();
-
+        public string GetName();
     }
 }

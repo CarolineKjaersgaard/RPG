@@ -1,4 +1,6 @@
 using Backend.GameLogic.Effect;
+using Backend.GameLogic.Effect.ActiveEffect;
+using Backend.GameLogic.Effect.PassiveEffect;
 using Backend.GameLogic.Item;
 
 namespace Backend.GameLogic.Entity
@@ -36,16 +38,22 @@ namespace Backend.GameLogic.Entity
 
         public void AddItem(IItem item)
         {
-            if(item.GetType() == "weapon")
+            foreach(IActiveEffect activeEffect in item.GetActiveEffects())
             {
-                weapon.Add(item);
-                effects.Add(item.GetName(), item.GetEffect());       
+                effects.Add(activeEffect.GetName(), activeEffect);
             }
-            if(item.GetEffect().IsPassive())
+            foreach(IPassiveEffect passiveEffect in item.GetPassiveEffects())
             {
-                buffs.Add(item);
-                item.GetEffect().ApplyEffect(this);
-                effects.Add(item.GetName(), item.GetEffect());
+                effects.Add(passiveEffect.GetName(), passiveEffect);
+                if(!buffs.Contains(item))
+                {
+                    buffs.Add(item);
+                }
+                passiveEffect.ApplyEffect(this);
+            }
+            if(item.GetItemType() == "weapon")
+            {
+                weapon.Add(item);     
             }
             if(item.CanBeLooted())
             {
