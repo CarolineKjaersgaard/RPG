@@ -2,7 +2,7 @@ using System;
 using System.Data;
 
 namespace Backend.Database.Tables {
-    public class Room : ITable
+    public class Enemy : ITable
 {
     public string Id { get; set; }
     public string Title { get; set; }
@@ -20,7 +20,15 @@ namespace Backend.Database.Tables {
     {
         return new List<string>
         {
-            "Id", "Title" 
+            Id, Title
+        };
+    }
+
+    public List<string> GetValues()
+    {
+        return new List<string>
+        {
+          "Id", "Title"  
         };
     }
 }
