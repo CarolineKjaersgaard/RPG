@@ -1,3 +1,4 @@
+using Backend.GameLogic.Effect;
 using Backend.GameLogic.Item;
 
 namespace Backend.GameLogic.Entity
@@ -14,6 +15,7 @@ namespace Backend.GameLogic.Entity
         List<IItem> buffs = new List<IItem>();
         List<IItem> loot = new List<IItem>();
         List<IItem> weapon = new List<IItem>();
+        Dictionary<string, IEffect> activeEffects = new Dictionary<string, IEffect>();
         public void AddItem(IItem item)
         {
             if(item.GetType() == "weapon")
@@ -33,7 +35,12 @@ namespace Backend.GameLogic.Entity
 
         public bool EndEffect(string effect)
         {
-            throw new NotImplementedException();
+            if(activeEffects.ContainsKey(effect))
+            {
+                activeEffects[effect].RemoveEffect();
+                return true;
+            }
+            return false;
         }
 
         public bool ExecuteEffect(string effect, IEntity target)
