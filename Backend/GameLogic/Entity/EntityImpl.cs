@@ -15,6 +15,7 @@ namespace Backend.GameLogic.Entity
         string Desc;
         string icon;
         int damageReduction;
+        int maxHealth;
         List<IItem> buffs = new List<IItem>();
         List<IItem> loot = new List<IItem>();
         List<IItem> weapon = new List<IItem>();
@@ -24,6 +25,7 @@ namespace Backend.GameLogic.Entity
         {
             this.type = type;
             this.health = health;
+            maxHealth = health;
             this.name = name;
             this.damageMod = damageMod;
             this.title = title;
@@ -95,9 +97,24 @@ namespace Backend.GameLogic.Entity
             return loot;
         }
 
+        public int GetMaxHealth()
+        {
+            return maxHealth;
+        }
+
         public string GetName()
         {
             return title;
+        }
+
+        public void UpdateHealth(int amount)
+        {
+            health -= amount;
+        }
+
+        public void UpdateMaxHealth(int amount)
+        {
+            maxHealth += amount;
         }
     }
 }
