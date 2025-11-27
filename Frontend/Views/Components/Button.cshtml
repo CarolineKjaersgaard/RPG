@@ -1,13 +1,11 @@
-﻿@Model ActiveEffectModelOrSomething
+﻿@using Backend.GameLogic.Item
+@using Backend.GameLogic.Effect
+@Model Item
 
 <div>
     <button>
-        <p class="title">
-            @Model.Title
-        </p>
+        <h3 class="title">@Model.Effect.Title</h3>
 
-        <p class="description">
-            @Model.Description
-        </p>
+        <p class="description">@Model.Effect.Description</p>
     </button>
 </div>

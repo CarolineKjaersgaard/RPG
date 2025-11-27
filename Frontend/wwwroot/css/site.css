@@ -1,8 +1,8 @@
 :root {
+    --titles-font-family: Courier New, Courier, monospace;
     --main-background-colour: #12121AFF;
     --main-text-colour: #FFFFFFFF;
     --main-font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    --titles-font-family: Courier New, Courier, monospace;
     --block-background-colour: #20202aFF;
     --block-text-colour: var(--main-text-colour);
     --block-border-colour: 406088FF;
@@ -10,6 +10,7 @@
     --margin-standard: 2rem;
     --text-emphasis-blue: var(--highlight-border-colour);
     --text-emphasis-red: #FF4060;
+    --zindex-per-item-base: 69420;
 }
 
 
@@ -56,14 +57,6 @@ html {
     margin: var(--margin-standard);
 }
 
-input[type=checkbox]#inventoryCheckBox > label.inventoryCheckBox {
-    /* Inventory hidden */
-}
-
-input[type=checkbox]#inventoryCheckBox:checked > label.inventoryCheckBox {
-    /* Inventory visible */
-}
-
 .mainContainer {
     height: stretch;
     width: stretch;
@@ -78,6 +71,55 @@ input[type=checkbox]#inventoryCheckBox:checked > label.inventoryCheckBox {
 
 
 
+input[type=checkbox]#inventoryCheckBox {
+    display: none;
+}
+
+.inventoryContainer {
+    position: absolute;
+    top: 0;
+    width: 70vw;
+    height: 100vh;
+    z-index: var(--zindex-per-item-base);
+    background-color: var(--block-background-colour);
+    color: var(--block-text-colour)
+}
+
+input[type=checkbox]#inventoryCheckBox + .inventoryContainer {
+    right: -100%;
+}
+
+input[type=checkbox]#inventoryCheckBox:checked + .inventoryContainer {
+    right: 0;
+}
+
+input[type=checkbox]#inventoryCheckBox label.inventoryCheckBox {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    font-size: 26px;
+    background-color: var(--block-background-colour);
+    color: var(--text-emphasis-blue);
+    padding: var(--margin-standard);
+}
+
+input[type=checkbox]#inventoryCheckBox + .inventoryContainer .inventoryBlockerDiv {
+    display: none;
+}
+
+input[type=checkbox]#inventoryCheckBox:checked + .inventoryContainer .inventoryBlockerDiv {
+    z-index: calc(var(--zindex-per-item-base) - 1);
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--main-background-colour);
+    opacity: 0.3;
+}
+
+
+
+
+
 .title {
     font-family: var(--titles-font-family);
     color: inherit;
@@ -86,6 +128,10 @@ input[type=checkbox]#inventoryCheckBox:checked > label.inventoryCheckBox {
 .description {
     font-family: var(--main-font-family);
     color: inherit;
+}
+
+.description:first-letter {
+    font-weight: bold;
 }
 
 
@@ -109,10 +155,20 @@ input[type=checkbox]#inventoryCheckBox:checked > label.inventoryCheckBox {
 
 i.emphBlue {
     color: var(--text-emphasis-blue);
+    font-style: normal;
 }
 
 i.emphRed {
     color: var(--text-emphasis-red);
+    font-style: normal;
+}
+
+i.emphItalic {
+    font-style: italic;
+}
+
+i.emphBold {
+    font-weight: bold;
 }
 
 
@@ -135,41 +191,41 @@ i.emphRed {
     transition: border-color linear 0.25s;
 }
 
-    .actionBtn:before {
-        position: absolute;
-        left: -0.1em;
-        top: -0.1em;
-        content: '';
-        border-top: 3em solid var(--block-border-colour);
-        border-right: 3em solid transparent;
-        transition: border-color linear 0.25s;
-    }
+.actionBtn:before {
+    position: absolute;
+    left: -0.1em;
+    top: -0.1em;
+    content: '';
+    border-top: 3em solid var(--block-border-colour);
+    border-right: 3em solid transparent;
+    transition: border-color linear 0.25s;
+}
 
-    .actionBtn:after {
-        position: absolute;
-        left: -0.15em;
-        top: -0.15em;
-        content: '';
-        border-top: 3em solid var(--buttonsList-background-colour);
-        border-right: 3em solid transparent;
-        transition: border-color linear 0.25s;
-    }
+.actionBtn:after {
+    position: absolute;
+    left: -0.15em;
+    top: -0.15em;
+    content: '';
+    border-top: 3em solid var(--buttonsList-background-colour);
+    border-right: 3em solid transparent;
+    transition: border-color linear 0.25s;
+}
 
-    .actionBtn:hover {
-        border: 0.1em solid var(--highlight-border-colour);
-    }
+.actionBtn:hover {
+    border: 0.1em solid var(--highlight-border-colour);
+}
     
-    .actionBtn:hover:before {
-        border-top: 3em solid var(--highlight-border-colour);
-    }
+.actionBtn:hover:before {
+    border-top: 3em solid var(--highlight-border-colour);
+}
     
-    .actionBtn > .title {
-        font-size: 10px;
-    }
+.actionBtn > .title {
+    font-size: 10px;
+}
 
-    .actionBtn > .description {
-        font-size: 8px;
-    }
+.actionBtn > .description {
+    font-size: 8px;
+}
 
 
 

@@ -1,11 +1,15 @@
-﻿@Model iDunnoThePlayerProbably
+﻿@using Backend.GameLogic.Player
+@using Backend.GameLogic.Item
+@Model Player
 
 <section class="buttonsList flex flex-horizontal">
     <header>
-        <h3>Actions</h3> <!-- We should get this from a 'resources' file -->
+        <h3>Actions</h3>
     </header>
 
-    @foreach (ActiveEffectModelOrSomething action in Model.ActiveEffects) {
-        @await Html.PartialAsync("Button.cshtml", action);
+    @if (true /*if in combat*/) {
+        @foreach (IItem action in Model.Inventory) {
+            @await Html.PartialAsync("Button.cshtml", action);
+        }
     }
 </section>

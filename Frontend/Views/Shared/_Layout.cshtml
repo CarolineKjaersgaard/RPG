@@ -9,17 +9,15 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Frontend.styles.css" asp-append-version="true" />
 </head>
-<body style="background-color:black; color:white">
+<body>
     <main role="main" class="container">
         @RenderBody()
     </main>
 
     <input type="checkbox" id="inventoryCheckBox" />
-    <label for="inventoryCheckBox" class="inventoryCheckBox">
-        <div>
-            @await RenderSectionAsync("Inventory.cshtml")
-        </div>
-    </label>
+    <div class="inventoryContainer">
+        @await RenderSectionAsync("Inventory.cshtml")
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
