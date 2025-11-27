@@ -25,7 +25,11 @@ namespace Backend.GameLogic.Player
         public void AddItem(IItem item)
         {
             inventory.Add(item);
-            //ExecuteEffect(item.GetEffect(), this);
+            effects.Add(item.GetName(), item.GetEffect());
+            if(item.GetEffect().IsPassive())
+            {
+                item.GetEffect().ApplyEffect(this);
+            }
         }
 
         public bool EndEffect(string effect)
