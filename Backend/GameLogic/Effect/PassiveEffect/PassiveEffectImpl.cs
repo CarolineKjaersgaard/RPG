@@ -10,7 +10,7 @@ namespace Backend.GameLogic.Effect.PassiveEffect
         string buffType;
         int amount;
         string stat;
-        IEntity activeTarget;
+        IEntity? activeTarget;
         int oldValue;
 
         public PassiveEffect(string title, string desc, string icon, string buffType, int amount, string stat)
@@ -61,12 +61,16 @@ namespace Backend.GameLogic.Effect.PassiveEffect
 
         public void RemoveEffect()
         {
-            switch(stat)
+            if(activeTarget != null)
+            {
+                switch(stat)
                 {
                     case "maxHealth":
                         activeTarget.UpdateMaxHealth(-CalculateBuff(activeTarget, oldValue));
                         break;
                 }
+            }
+            
         }
     }
 }

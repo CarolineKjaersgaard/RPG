@@ -101,9 +101,12 @@ namespace Backend.GameLogic.Game
             player.ExecuteEffect(effect, targetObject);
             foreach(IEntity monster in currentRoomMonsters)
             {
-                List<string> effects = monster.GetEffectNames();
-                int chosenEffect = rnd.Next(0, effects.Count);
-                monster.ExecuteEffect(effects[chosenEffect], player);
+                if(monster.GetHealth() > 0)
+                {
+                    List<string> effects = monster.GetEffectNames();
+                    int chosenEffect = rnd.Next(0, effects.Count);
+                    monster.ExecuteEffect(effects[chosenEffect], player);
+                }
             }
             currentRoomMonsters.Add(player);
             return currentRoomMonsters;

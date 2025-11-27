@@ -13,6 +13,7 @@ namespace Backend.GameLogic.Player
         private int defense = 15;
         private int baseAttackMod = 2;
         private int baseDamageMod = 2;
+        string lastAction = "";
         private Dictionary<string, IEffect> effects = new Dictionary<string, IEffect>();
         private List<IItem> inventory = new List<IItem>();
         private (int, int) currentCoords = (0, 0);
@@ -58,9 +59,24 @@ namespace Backend.GameLogic.Player
             return false;
         }
 
+        public int GetAttackMod()
+        {
+            return baseAttackMod;
+        }
+
         public (int, int) GetCoords()
         {
             return CurrentCoords;
+        }
+
+        public int GetDamageMod()
+        {
+            return baseDamageMod;
+        }
+
+        public int GetDefense()
+        {
+            return defense;
         }
 
         public List<string> GetEffectNames()
@@ -86,6 +102,26 @@ namespace Backend.GameLogic.Player
         public string GetName()
         {
             return name;
+        }
+
+        public void SetLastAction(string action)
+        {
+            lastAction = action;
+        }
+
+        public void UpdateAttackMod(int amount)
+        {
+            baseAttackMod += amount;
+        }
+
+        public void UpdateDamageMod(int amount)
+        {
+            baseDamageMod += amount;
+        }
+
+        public void UpdateDefense(int amount)
+        {
+            defense += amount;
         }
 
         public void UpdateHealth(int amount)
