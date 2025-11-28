@@ -43,7 +43,24 @@ namespace Backend.GameLogic
                 room.GetMonsters().Add(entityFactory.CreateEntity(enemy, game));
             }
 
-            
+            List<Item> roomItems = new List<Item>();
+            List<Item> items = game.GetItems();
+            int totalItemRarity = 0;
+            while(totalItemRarity < roomStats.Rarity)
+            {
+                int index = rnd.Next(0, items.Count);
+                while(items[index].Rarity + totalItemRarity > roomStats.Rarity)
+                {
+                    index = rnd.Next(0, items.Count);
+                }
+                roomItems.Add(items[index]);
+                totalItemRarity += items[index].Rarity;
+            }
+            IItemFactory itemFactory = new ItemFactory();
+            foreach(Item item in roomItems)
+            {
+                room.GetItems().Add(itemFactory.Create(item, game));
+            }
             return room;
         }
     }
