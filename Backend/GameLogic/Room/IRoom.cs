@@ -1,7 +1,7 @@
 ﻿using Backend.GameLogic.Entity;
 using Backend.GameLogic.Item;
 
-namespace Backend.GameLogic.Room
+namespace Backend.GameLogic
 {
     public interface IRoom
     {

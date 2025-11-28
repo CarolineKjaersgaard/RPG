@@ -1,27 +1,30 @@
-﻿using Backend.GameLogic.Entity;
+﻿using Backend.Database;
+using Backend.Database.Tables;
+using Backend.GameLogic.Entity;
 using Backend.GameLogic.Item;
 using Backend.GameLogic.Player;
-using Backend.GameLogic.Room;
 
 namespace Backend.GameLogic.Game
 {
     public class Game : IGame
     {
-        Dictionary<(int, int), IRoom> map = new Dictionary<(int, int), IRoom>();
-        IRoom currentRoom;
-        IPlayer player;
-        IDatabase database;
-        Random rnd;
+        public Dictionary<(int, int), IRoom> map = new Dictionary<(int, int), IRoom>();
+        public IRoom? currentRoom;
+        public IPlayer player;
+        private IDatabase database;
+        private Random rnd;
         public Game(IPlayer player, IDatabase database)
         {
             this.player = player;
             this.database = database;
+            rnd = new Random();
         }
 
         public Game(IDatabase database)
         {
             player = new PlayerImpl();
             this.database = database;
+            rnd = new Random();
         }
 
         public IPlayer EndEffect(string Effect)
@@ -46,10 +49,16 @@ namespace Backend.GameLogic.Game
             }
             else
             {
-                room = CreateRoom(coords);
+                List<Room> rooms = database.GetItems<Room>("", "");
+                room = CreateRoom(player.GetCoords(), rooms);
             }
             bool containsMonsters = false;
             List<IEntity> monsters = room.GetMonsters();
+            if(coords == (0,0) && monsters.Count > 0)
+            {
+                room.GetMonsters().Clear();
+                monsters.Clear();
+            }
             foreach(IEntity monster in monsters)
             {
                 if(monster.GetHealth() > 0)
@@ -62,13 +71,22 @@ namespace Backend.GameLogic.Game
             return (room, containsMonsters);
         }
 
-        private IRoom CreateRoom((int, int) coords)
+        private IRoom CreateRoom((int, int) coords, List<Room> rooms)
         {
-            return null;
+            int chosenRoom = rnd.Next(0, rooms.Count);
+            Room roomStats = rooms[chosenRoom];
+            RoomFactory roomFactory = new RoomFactory();
+            IRoom room = roomFactory.CreateRoom(roomStats);
+            map.Add(coords, room);
+            return room;
         }
 
         public List<IEntity> ExecuteEffect(string effect, string target)
         {
+            if(currentRoom == null)
+            {
+                throw new Exception("no room has been entered");
+            }
             List<IEntity> currentRoomMonsters = currentRoom.GetMonsters();
             
             IEntity targetObject = player;
@@ -83,9 +101,12 @@ namespace Backend.GameLogic.Game
             player.ExecuteEffect(effect, targetObject);
             foreach(IEntity monster in currentRoomMonsters)
             {
-                List<string> effects = monster.GetEffectNames();
-                int chosenEffect = rnd.Next(0, effects.Count);
-                monster.ExecuteEffect(effects[chosenEffect], player);
+                if(monster.GetHealth() > 0)
+                {
+                    List<string> effects = monster.GetEffectNames();
+                    int chosenEffect = rnd.Next(0, effects.Count);
+                    monster.ExecuteEffect(effects[chosenEffect], player);
+                }
             }
             currentRoomMonsters.Add(player);
             return currentRoomMonsters;
@@ -93,13 +114,40 @@ namespace Backend.GameLogic.Game
 
         public List<IItem> LootCurrentRoom()
         {
-            throw new NotImplementedException();
+            if(currentRoom == null)
+            {
+                throw new Exception("no room has been entered");
+            }
+            List<IItem> items = currentRoom.GetItems();
+            
+            foreach(IEntity monster in currentRoom.GetMonsters())
+            {
+                List<IItem> monsterItems = monster.GetItems();
+                foreach(IItem  item in monsterItems)
+                {
+                    if(item.CanBeLooted())
+                    {
+                        items.Add(item);
+                    }
+                }
+                monster.GetItems().Clear();
+            }
+            foreach(IItem item in items)
+            {
+                player.AddItem(item);
+            }
+            currentRoom.GetItems().Clear();
+            return items;
         }
 
 
         public (bool, IPlayer) StartGame()
         {
-            rnd = new Random();
+            List<Room> rooms = database.GetItems<Room>("", "");
+            if(rooms.Count > 0)
+            {
+                CreateRoom(player.GetCoords(), rooms);
+            }
             return (true, player);
         }
     }

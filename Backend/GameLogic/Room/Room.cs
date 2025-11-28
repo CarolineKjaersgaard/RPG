@@ -1,0 +1,49 @@
+using System.Collections.Specialized;
+using Backend.GameLogic.Effect;
+using Backend.GameLogic.Entity;
+using Backend.GameLogic.Item;
+
+namespace Backend.GameLogic
+{
+    public class RoomImpl : IRoom
+    {
+        string title;
+        bool isUnlocked;
+        string desc;
+        Dictionary<(int, int), bool> doors = new Dictionary<(int, int), bool>();
+        (int, int) entryDoor = (0,0);
+        IEffect? effect;
+        string image;
+        List<IEntity> monsters = new List<IEntity>();
+        List<IItem> items = new List<IItem>();
+        (int, int) coords;
+
+        public RoomImpl(string title, bool isUnlocked, string desc, string image, (int, int) coords)
+        {
+            this.title = title;
+            this.isUnlocked = isUnlocked;
+            this.desc = desc;
+            this.image = image;
+            this.coords = coords;
+        }
+
+        public List<IItem> GetItems()
+        {
+            return items;
+        }
+
+        public List<IEntity> GetMonsters()
+        {
+            return monsters;
+        }
+
+        public void SetEntryDoor((int, int) playerCoords)
+        {
+            (int, int) index = (playerCoords.Item1 - coords.Item1, playerCoords.Item2 - coords.Item2);
+            if(doors.ContainsKey(index))
+            {
+                entryDoor = index;
+            }
+        }
+    }
+}

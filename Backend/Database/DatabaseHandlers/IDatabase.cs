@@ -1,12 +1,15 @@
+using ITable = Backend.Database.Tables.ITable;
 
-
-public interface IDatabase
+namespace Backend.Database
 {
-    public ITable GetItem<ITable>(string id);
+    public interface IDatabase
+    {
+        public Table GetItem<Table>(string id) where Table: ITable;
 
-    public List<ITable> GetItems<ITable>(string value, string collumn);
+        public List<Table> GetItems<Table>(string value, string collumn) where Table: ITable;
 
-    public List<ITable> GetItems<ITable>(int value, string collumn);
+        public List<Table> GetItems<Table>(int value, string collumn) where Table: ITable;
 
-    public List<ITable> GetItems<ITable>(int lowerValue, int upperValue, string collumn);
+        public List<Table> GetItems<Table>(int lowerValue, int upperValue, string collumn) where Table: ITable;
+    }
 }

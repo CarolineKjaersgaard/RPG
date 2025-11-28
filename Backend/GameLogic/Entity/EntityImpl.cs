@@ -1,34 +1,52 @@
-﻿using Backend.GameLogic.Effect;
+using System.Reflection.Metadata.Ecma335;
+using Backend.GameLogic.Effect;
 using Backend.GameLogic.Effect.ActiveEffect;
 using Backend.GameLogic.Effect.PassiveEffect;
-using Backend.GameLogic.Entity;
 using Backend.GameLogic.Item;
 
-namespace Backend.GameLogic.Player
+namespace Backend.GameLogic.Entity
 {
-    public class PlayerImpl:IPlayer
+    public class EntityImpl : IEntity
     {
-        private int health = 10;
-        private int maxHealth = 10;
-        private int defense = 15;
-        private int baseAttackMod = 2;
-        private int baseDamageMod = 2;
+        string type;
+        int health;
+        string name;
+        int damageMod;
+        int attackMod;
+        string title;
+        int defense;
+        string Desc;
+        string icon;
+        int damageReduction;
         string lastAction = "";
-        private Dictionary<string, IEffect> effects = new Dictionary<string, IEffect>();
-        private List<IItem> inventory = new List<IItem>();
-        private (int, int) currentCoords = (0, 0);
-        private string name = "player";
-        public int Health { get => health; private set => health = value; }
-        public int Defense { get => defense; private set => defense = value; }
-        public int BaseAttackMod { get => baseAttackMod; private set => baseAttackMod = value; }
-        public int BaseDamageMod { get => baseDamageMod; private set => baseDamageMod = value; }
-        public Dictionary<string, IEffect> Effects { get => effects; private set => effects = value; }
-        public List<IItem> Inventory { get => inventory; private set => inventory = value; }
-        public (int, int) CurrentCoords { get => currentCoords; set => currentCoords = value; }
+        int maxHealth;
+        List<IItem> buffs = new List<IItem>();
+        List<IItem> loot = new List<IItem>();
+        List<IItem> weapon = new List<IItem>();
+        Dictionary<string, IEffect> effects = new Dictionary<string, IEffect>();
+
+        public EntityImpl(string type, int health, string name, int damageMod, string title, string desc, string icon, int damageReduction, List<IItem> items, int defense)
+        {
+            this.type = type;
+            this.health = health;
+            maxHealth = health;
+            this.name = name;
+            this.damageMod = damageMod;
+            attackMod = damageMod;
+            this.title = title;
+            Desc = desc;
+            this.icon = icon;
+            this.damageReduction = damageReduction;
+            foreach (IItem item in items)
+            {
+                AddItem(item);
+            }
+
+            this.defense = defense;
+        }
 
         public void AddItem(IItem item)
         {
-            inventory.Add(item);
             foreach(IActiveEffect activeEffect in item.GetActiveEffects())
             {
                 effects.Add(activeEffect.GetName(), activeEffect);
@@ -36,7 +54,19 @@ namespace Backend.GameLogic.Player
             foreach(IPassiveEffect passiveEffect in item.GetPassiveEffects())
             {
                 effects.Add(passiveEffect.GetName(), passiveEffect);
+                if(!buffs.Contains(item))
+                {
+                    buffs.Add(item);
+                }
                 passiveEffect.ApplyEffect(this);
+            }
+            if(item.GetItemType() == "weapon")
+            {
+                weapon.Add(item);     
+            }
+            if(item.CanBeLooted())
+            {
+                loot.Add(item);
             }
         }
 
@@ -54,24 +84,19 @@ namespace Backend.GameLogic.Player
         {
             if(effects.ContainsKey(effect))
             {
-                return Effects[effect].ApplyEffect(target);
+                return effects[effect].ApplyEffect(target);
             }
             return false;
         }
 
         public int GetAttackMod()
         {
-            return baseAttackMod;
-        }
-
-        public (int, int) GetCoords()
-        {
-            return CurrentCoords;
+            return attackMod;
         }
 
         public int GetDamageMod()
         {
-            return baseDamageMod;
+            return damageMod;
         }
 
         public int GetDefense()
@@ -91,7 +116,7 @@ namespace Backend.GameLogic.Player
 
         public List<IItem> GetItems()
         {
-            return inventory;
+            return loot;
         }
 
         public int GetMaxHealth()
@@ -101,7 +126,7 @@ namespace Backend.GameLogic.Player
 
         public string GetName()
         {
-            return name;
+            return title;
         }
 
         public void SetLastAction(string action)
@@ -111,12 +136,12 @@ namespace Backend.GameLogic.Player
 
         public void UpdateAttackMod(int amount)
         {
-            baseAttackMod += amount;
+            attackMod += amount;
         }
 
         public void UpdateDamageMod(int amount)
         {
-            baseDamageMod += amount;
+            damageMod += amount;
         }
 
         public void UpdateDefense(int amount)
@@ -127,10 +152,6 @@ namespace Backend.GameLogic.Player
         public void UpdateHealth(int amount)
         {
             health -= amount;
-            if(health > maxHealth)
-            {
-                health = maxHealth;
-            }
         }
 
         public void UpdateMaxHealth(int amount)
