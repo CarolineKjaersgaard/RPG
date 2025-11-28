@@ -7,21 +7,12 @@ namespace Backend.Database.Tables {
     public required string Id { get; set; }
     public required string Title { get; set; }
     public required string Description {get; set;}
-    public bool isActive {get; set;}
-    public bool isAoe {get; set;}
+    public required string TypeId {get; set;}
+    public required EffectType Type {get; set;}
     public int Amount {get; set;}
-    public required string TargetTypeId {get; set;}
-    public required TargetType TargetType {get; set;}
-    public required string EffectTypeId {get; set;}
-    public required EffectType EffectType {get; set;}
+    public ICollection<Room>? Rooms {get; set;}
+    public ICollection<Item>? Items {get; set;}
+    public ICollection<Enemy>? Enemies {get; set;}
 
-
-    public List<string> GetCollumns()
-    {
-        return new List<string>
-        {
-            "Id", "Title", "Description", "isActive", "isAoe"
-        };
-    }
 }
 }

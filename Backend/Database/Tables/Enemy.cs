@@ -7,26 +7,17 @@ namespace Backend.Database.Tables {
     public required string Id { get; set; }
     public required string Title { get; set; }
     public required string Description {get; set;}
-    public int Doors {get; set;}
+    public required string TypeId {get; set;}
+    public required EnemyType Type {get; set;}
     public int Rarity { get; set; }
     public int Difficulty {get; set;}
+    public int PackSize {get; set;}
     public required string WeaponId {get; set;}
     public required Item Weapon {get; set;}
-    public List<string>? LootIds {get; set;}
-    public ICollection<Item>? Loot {get; set;}
     public string? EffectId {get; set;}
     public Effect? Effect {get; set;}
-    public List<string>? TagIds {get; set;}
-    public ICollection<Tag>? Tags {get; set;}
-
-
-    public List<string> GetCollumns()
-    {
-        return new List<string>
-        {
-            "Id", "Title"
-        };
-    }
+    public ICollection<EnemyInRoom>? Rooms {get; set;}
+    public ICollection<LootOnEnemy>? Loot {get; set;}
 
 }
 }
