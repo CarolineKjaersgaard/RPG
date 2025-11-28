@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Combat";
+}
+
+<div style="display: flex">
+    <div class="game-container" style="overflow-y: scroll; height: 400px; width: 800px;">
+        <p class="game-text">
+
+        </p>
+    </div>
+    <div class="combat-log" style="overflow-y: scroll; height: 400px; width: 300px;" id="CombatLog">
+        <pre id ="CombatLogText" class="game-text"></pre>
+    </div>
+</div>
+
+<div class="button-row">
+    <button id="attackBtn" type="submit" style="margin: 0 auto" class="game-action-button">Attack</button>
+    <form asp-controller="Game" asp-action="Flee" method="post">
+        <button id="fleeBtn" type="submit" style="margin: 0 auto" class="game-action-button">Flee</button>
+    </form>
+</div>
+
+<script>
+    const combatLog = document.getElementById("CombatLog");
+    const logText = document.getElementById("CombatLogText");
+
+    document.getElementById("attackBtn").addEventListener("click", function(e) {
+        e.preventDefault();
+        fetch('/Game/Attack', { method: 'POST' })
+          .then(res => res.json())
+          .then(data => {
+              logText.textContent += data.log + "\n";
+              combatLog.scrollTop = combatLog.scrollHeight;
+          });
+    });
+</script>

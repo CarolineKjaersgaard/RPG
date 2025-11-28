@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Exploration";
+}
+
+<div class="game-container" style="overflow-y: scroll; height: 400px;">
+    <p class="game-text">
+
+    </p>
+</div>
+
+<div class="button-row">
+    <form asp-controller="Game" asp-action="Continue" method="post">
+        <button type="submit" style="margin: 0 auto" class="game-action-button">Next Room</button>
+    </form>
+    <form asp-controller="Game" asp-action="Explore" method="post">
+        <button type="submit" style="margin: 0 auto" class="game-action-button">Explore</button>
+    </form>
+    <form asp-controller="Game" asp-action="Loot" method="post">
+        <button type="submit" style="margin: 0 auto" class="game-action-button">Loot</button>
+    </form>
+    <form asp-controller="Game" asp-action="Rest" method="post">
+        <button type="submit" style="margin: 0 auto" class="game-action-button">Rest</button>
+    </form>
+</div>

@@ -29,3 +29,18 @@
     padding: 5px;
     box-shadow: 0 0 5px white, 0 0 10px white;
 }
+
+.combat-log {
+    align-content: start;
+    border: 5px solid white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 5px;
+    box-shadow: 0 0 5px white, 0 0 10px white;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between; /* Equal space between buttons and edges */
+    padding: 0 20px; /* Optional: space between buttons and screen edges */
+}

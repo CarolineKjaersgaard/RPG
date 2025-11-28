@@ -1,8 +1,16 @@
+using API;
+using Backend.Database.DatabaseHandlers;
+using Backend.GameLogic.Game;
+using Backend.GameLogic.Player;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IGameAPI>();
+builder.Services.AddScoped<IGameAPI, GameAPI>();
+builder.Services.AddScoped<IGame, Game>();
+builder.Services.AddScoped<IPlayer, PlayerImpl>();
+builder.Services.AddScoped<IDatabase, DatabaseHandler>();
 
 var app = builder.Build();
 
