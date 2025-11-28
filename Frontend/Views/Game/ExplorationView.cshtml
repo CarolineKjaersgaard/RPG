@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "_Layout";
+}
+@using Backend.GameLogic.Game
+@using Backend.GameLogic
+@using Backend.GameLogic.Player
+@Model Game
+
+@{
+    var game = Model;
+}
+
+@section Inventory {
+    <!-- Til Thor, min front-end ven. Dette virker ikke: -->
+    @await Html.RenderPartialAsync("Inventory.cshtml", (PlayerImpl) game.player)
+}
+
+<section class="mainContainer flex flex-vertical">
+    <div class="flex flex-horizontal">
+        @await RenderSectionAsync("MainTextBox.cshtml", Model.CurrentRoom)
+
+        @await RenderSectionAsync("Map.cshtml", Model)
+    </div>
+
+    @await RenderSectionAsync("ButtonList.cshtml", Model.Player)
+</section>

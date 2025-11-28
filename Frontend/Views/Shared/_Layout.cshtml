@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Backend.GameLogic.Game
+@using Backend.GameLogic.Player
+@Model Game
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -16,8 +20,12 @@
 
     <input type="checkbox" id="inventoryCheckBox" />
     <div class="inventoryContainer">
-        @await RenderSectionAsync("Inventory.cshtml")
+        @await RenderSectionAsync("Inventory", required: false)
     </div>
+
+    <footer>
+        <p>Lavet af Asger, Caroline, Clara, Jakob & Thor</p>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

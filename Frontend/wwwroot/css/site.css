@@ -55,6 +55,8 @@ html {
 
 .container {
     margin: var(--margin-standard);
+    height: stretch;
+    width: stretch;
 }
 
 .mainContainer {
@@ -139,6 +141,7 @@ input[type=checkbox]#inventoryCheckBox:checked + .inventoryContainer .inventoryB
 
 
 .map {
+    background-color: var(--block-background-colour);
     width: stretch;
     height: stretch;
 }
@@ -148,7 +151,7 @@ input[type=checkbox]#inventoryCheckBox:checked + .inventoryContainer .inventoryB
     height: stretch;
     text-align: center;
     border: var(--block-border-colour);
-    background: var(--block-background-colour);
+    background-color: var(--block-background-colour);
     color: var(--block-text-colour);
     font-family: var(--main-font-family);
 }
