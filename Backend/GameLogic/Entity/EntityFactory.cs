@@ -1,4 +1,8 @@
 using Backend.Database.Tables;
+using Backend.GameLogic.EffectImpl;
+using Backend.GameLogic.EffectImpl.ActiveEffect;
+using Backend.GameLogic.EffectImpl.PassiveEffect;
+using Backend.GameLogic.ItemImpl;
 
 namespace Backend.GameLogic.Entity
 {
@@ -6,7 +10,15 @@ namespace Backend.GameLogic.Entity
     {
         public IEntity CreateEntity(Enemy enemyStats, IGame game)
         {
-            throw new NotImplementedException();
+            List<IItem> items = new List<IItem>();
+            IItemFactory itemFactory = new ItemFactory();
+            items.Add(itemFactory.Create(enemyStats.Weapon, game));
+            foreach(Item item in enemyStats.Loot)
+            {
+                items.Add(itemFactory.Create(item, game));
+            }
+            IEntity entity = new EntityImpl(" ", 10, enemyStats.Title, 0, enemyStats.Title, enemyStats.Description, " ", 0, items, 10);
+            return entity;
         }
     }
 
