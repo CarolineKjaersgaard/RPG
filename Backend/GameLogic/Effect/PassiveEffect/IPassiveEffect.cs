@@ -1,4 +1,4 @@
-﻿namespace Backend.GameLogic.Effect.PassiveEffect
+﻿namespace Backend.GameLogic.EffectImpl.PassiveEffect
 {
     public interface IPassiveEffect : IEffect
     {
