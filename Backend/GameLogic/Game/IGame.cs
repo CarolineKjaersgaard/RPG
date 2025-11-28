@@ -1,9 +1,10 @@
 
 
 using Backend.GameLogic.Entity;
-using Backend.GameLogic.Item;
+using Backend.GameLogic.ItemImpl;
 using Backend.GameLogic.Player;
 using Backend.GameLogic;
+using Backend.Database.Tables;
 
 public interface IGame
 {
@@ -18,4 +19,8 @@ public interface IGame
     public IPlayer EndEffect(string Effect);
 
     public void EndGame();
+
+    public List<Enemy> GetEnemies();
+
+    public List<Item> GetItems();
 }

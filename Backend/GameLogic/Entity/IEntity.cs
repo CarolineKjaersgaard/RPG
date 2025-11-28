@@ -1,4 +1,4 @@
-﻿using Backend.GameLogic.Item;
+﻿using Backend.GameLogic.ItemImpl;
 
 namespace Backend.GameLogic.Entity
 {

@@ -1,6 +1,6 @@
 ﻿using Backend.GameLogic.Entity;
 
-namespace Backend.GameLogic.Effect
+namespace Backend.GameLogic.EffectImpl
 {
     public interface IEffect
     {

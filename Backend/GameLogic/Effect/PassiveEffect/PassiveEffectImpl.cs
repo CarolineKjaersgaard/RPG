@@ -1,6 +1,6 @@
 using Backend.GameLogic.Entity;
 
-namespace Backend.GameLogic.Effect.PassiveEffect
+namespace Backend.GameLogic.EffectImpl.PassiveEffect
 {
     public class PassiveEffect : IPassiveEffect
     {

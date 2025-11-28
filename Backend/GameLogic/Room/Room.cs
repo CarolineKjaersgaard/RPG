@@ -1,7 +1,8 @@
 using System.Collections.Specialized;
-using Backend.GameLogic.Effect;
+using Backend.Database.Tables;
+using Backend.GameLogic.EffectImpl;
 using Backend.GameLogic.Entity;
-using Backend.GameLogic.Item;
+using Backend.GameLogic.ItemImpl;
 
 namespace Backend.GameLogic
 {
@@ -27,6 +28,11 @@ namespace Backend.GameLogic
             this.coords = coords;
         }
 
+        public IEffect GetEffect()
+        {
+            return effect;
+        }
+
         public List<IItem> GetItems()
         {
             return items;
@@ -35,6 +41,11 @@ namespace Backend.GameLogic
         public List<IEntity> GetMonsters()
         {
             return monsters;
+        }
+
+        public void SetEffect(IEffect effect)
+        {
+            this.effect = effect;
         }
 
         public void SetEntryDoor((int, int) playerCoords)
