@@ -40,6 +40,21 @@ namespace Backend.Database.Handlers
             modelBuilder.Entity<EnemyInRoom>().HasKey(p => p.Id);
             modelBuilder.Entity<LootInRoom>().HasKey(p => p.Id);
             modelBuilder.Entity<LootOnEnemy>().HasKey(p => p.Id);
+
+            modelBuilder.Entity<Room>().HasMany(l => l.Loot).WithOne(r => r.Room).HasForeignKey(r => r.RoomId);
+            modelBuilder.Entity<Room>().HasMany(e => e.Enemies).WithOne(r => r.Room).HasForeignKey(r => r.RoomId);
+            modelBuilder.Entity<Item>().HasMany(r => r.Rooms).WithOne(i => i.Item).HasForeignKey(i => i.ItemId);
+            modelBuilder.Entity<Item>().HasMany(e => e.Enemies).WithOne(i => i.Item).HasForeignKey(i => i.ItemId);
+            modelBuilder.Entity<Enemy>().HasMany(r => r.Rooms).WithOne(e => e.Enemy).HasForeignKey(e => e.EnemyId);
+            modelBuilder.Entity<Enemy>().HasMany(l => l.Loot).WithOne(e => e.Enemy).HasForeignKey(e => e.EnemyId);
+            modelBuilder.Entity<Effect>().HasMany(r => r.Rooms).WithOne(e => e.Effect).HasForeignKey(e => e.EffectId);
+            modelBuilder.Entity<Effect>().HasMany(i => i.Items).WithOne(e => e.Effect).HasForeignKey(e => e.EffectId);
+            modelBuilder.Entity<Effect>().HasMany(e => e.Enemies).WithOne(e => e.Effect).HasForeignKey(e => e.EffectId);
+            modelBuilder.Entity<RoomType>().HasMany(r => r.Rooms).WithOne(t => t.Type).HasForeignKey(t => t.TypeId);
+            modelBuilder.Entity<ItemType>().HasMany(i => i.Items).WithOne(t => t.Type).HasForeignKey(t => t.TypeId);
+            modelBuilder.Entity<EnemyType>().HasMany(e => e.Enemies).WithOne(t => t.Type).HasForeignKey(t => t.TypeId);
+            modelBuilder.Entity<EffectType>().HasMany(e => e.Effects).WithOne(t => t.Type).HasForeignKey(t => t.TypeId);
+            modelBuilder.Entity<TargetType>().HasMany(e => e.EffectTypes).WithOne(t => t.TargetType).HasForeignKey(t => t.TargetTypeId);
         }
     }
 }
