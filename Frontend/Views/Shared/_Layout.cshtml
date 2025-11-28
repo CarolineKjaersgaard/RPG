@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Backend.GameLogic.Game
+@using Backend.GameLogic.Player
+@Model Game
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,16 +14,24 @@
     <link rel="stylesheet" href="~/Frontend.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/GameComponents.css" />
 </head>
-<body class="game-body">
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+<body>
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
+
+    <input type="checkbox" id="inventoryCheckBox" />
+    <div class="inventoryContainer">
+        @await RenderSectionAsync("Inventory", required: false)
     </div>
+
+    <footer>
+        <p>Lavet af Asger, Caroline, Clara, Jakob & Thor</p>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

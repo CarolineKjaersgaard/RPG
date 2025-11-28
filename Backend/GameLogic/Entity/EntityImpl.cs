@@ -1,3 +1,4 @@
+using System.Reflection.Metadata.Ecma335;
 using Backend.GameLogic.Effect;
 using Backend.GameLogic.Effect.ActiveEffect;
 using Backend.GameLogic.Effect.PassiveEffect;
@@ -11,31 +12,37 @@ namespace Backend.GameLogic.Entity
         int health;
         string name;
         int damageMod;
+        int attackMod;
         string title;
+        int defense;
         string Desc;
         string icon;
         int damageReduction;
+        string lastAction = "";
         int maxHealth;
         List<IItem> buffs = new List<IItem>();
         List<IItem> loot = new List<IItem>();
         List<IItem> weapon = new List<IItem>();
         Dictionary<string, IEffect> effects = new Dictionary<string, IEffect>();
 
-        public EntityImpl(string type, int health, string name, int damageMod, string title, string desc, string icon, int damageReduction, List<IItem> items)
+        public EntityImpl(string type, int health, string name, int damageMod, string title, string desc, string icon, int damageReduction, List<IItem> items, int defense)
         {
             this.type = type;
             this.health = health;
             maxHealth = health;
             this.name = name;
             this.damageMod = damageMod;
+            attackMod = damageMod;
             this.title = title;
             Desc = desc;
             this.icon = icon;
             this.damageReduction = damageReduction;
-            foreach(IItem item in items)
+            foreach (IItem item in items)
             {
                 AddItem(item);
             }
+
+            this.defense = defense;
         }
 
         public void AddItem(IItem item)
@@ -82,6 +89,21 @@ namespace Backend.GameLogic.Entity
             return false;
         }
 
+        public int GetAttackMod()
+        {
+            return attackMod;
+        }
+
+        public int GetDamageMod()
+        {
+            return damageMod;
+        }
+
+        public int GetDefense()
+        {
+            return defense;
+        }
+
         public List<string> GetEffectNames()
         {
             return effects.Keys.ToList();
@@ -105,6 +127,26 @@ namespace Backend.GameLogic.Entity
         public string GetName()
         {
             return title;
+        }
+
+        public void SetLastAction(string action)
+        {
+            lastAction = action;
+        }
+
+        public void UpdateAttackMod(int amount)
+        {
+            attackMod += amount;
+        }
+
+        public void UpdateDamageMod(int amount)
+        {
+            damageMod += amount;
+        }
+
+        public void UpdateDefense(int amount)
+        {
+            defense += amount;
         }
 
         public void UpdateHealth(int amount)

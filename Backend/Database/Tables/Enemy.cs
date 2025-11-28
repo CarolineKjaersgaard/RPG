@@ -2,7 +2,7 @@ using System;
 using System.Data;
 
 namespace Backend.Database.Tables {
-    public class Room : ITable
+    public class Enemy : ITable
 {
     public required string Id { get; set; }
     public required string Title { get; set; }
@@ -10,6 +10,10 @@ namespace Backend.Database.Tables {
     public int Doors {get; set;}
     public int Rarity { get; set; }
     public int Difficulty {get; set;}
+    public required string WeaponId {get; set;}
+    public required Item Weapon {get; set;}
+    public List<string>? LootIds {get; set;}
+    public ICollection<Item>? Loot {get; set;}
     public string? EffectId {get; set;}
     public Effect? Effect {get; set;}
     public List<string>? TagIds {get; set;}
@@ -20,8 +24,9 @@ namespace Backend.Database.Tables {
     {
         return new List<string>
         {
-            "Id", "Title" 
+            "Id", "Title"
         };
     }
+
 }
 }

@@ -1,12 +1,16 @@
 ﻿using Backend.Database.Tables;
+using Backend.GameLogic;
+using Backend.GameLogic.Entity;
+using Backend.GameLogic.Item;
 
 namespace Backend.GameLogic
 {
     public class RoomFactory : IRoomFactory
     {
-        public IRoom CreateRoom(ITable roomStats)
+        public IRoom CreateRoom(Room roomStats)
         {
-            return new RoomImpl();
+            IRoom room = new RoomImpl(" ", true, " ", " ", (0,0));
+            return room;
         }
     }
 }
