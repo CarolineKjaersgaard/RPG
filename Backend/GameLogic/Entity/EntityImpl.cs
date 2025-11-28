@@ -40,6 +40,11 @@ namespace Backend.GameLogic.Entity
             foreach (IItem item in items)
             {
                 AddItem(item);
+                IList<IPassiveEffect> effects = item.GetPassiveEffects();
+                foreach(IActiveEffect activeEffect in item.GetActiveEffects())
+                {
+                    activeEffect.SetOwner(this);
+                }
             }
 
             this.defense = defense;
