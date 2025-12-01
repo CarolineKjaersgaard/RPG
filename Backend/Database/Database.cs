@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Backend.Database.Tables;
 using Backend.Database.Handlers;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Backend.Database
 {
@@ -34,6 +35,15 @@ namespace Backend.Database
             seeder.SeedLootInRooms("Database/Data/Connections/LootInRooms.csv");
             seeder.SeedLootOnEnemies("Database/Data/Connections/LootOnEnemies.csv");
         }
+        public Table GetItem<Table>() where Table: class, ITable
+        {    
+            var item = _context.Set<Table>().OrderBy(e => EF.Functions.Random()).FirstOrDefault();
+            if (item == null)
+            {
+                throw new InvalidOperationException($"No items found for type '{typeof(Table).Name}'.");
+            }
+            return item;
+        }
         public Table GetItem<Table>(string id) where Table: class, ITable
         {
             Table? item = _context.Set<Table>().Find(id);
@@ -42,6 +52,10 @@ namespace Backend.Database
                 throw new KeyNotFoundException($"Item of type '{typeof(Table).Name}' with Id '{id}' was not found.");
             }
             return item;
+        }
+        public List<Table> GetItems<Table>() where Table: class, ITable
+        {
+            return _context.Set<Table>().ToList();
         }
 
         public List<Table> GetItems<Table>(object value, string column) where Table : class, ITable
@@ -52,9 +66,7 @@ namespace Backend.Database
             var equality = Expression.Equal(property, constant);
             var parameterInColumnIsValue = Expression.Lambda<Func<Table, bool>>(equality, parameter);
 
-            return _context.Set<Table>()
-                .Where(parameterInColumnIsValue)
-                .ToList();
+            return _context.Set<Table>().Where(parameterInColumnIsValue).ToList();
         }
 
         public List<Table> GetItems<Table>(int lowerValue, int upperValue, string column) where Table: class, ITable
@@ -68,9 +80,7 @@ namespace Backend.Database
             var inRange = Expression.AndAlso(greaterThanOrEqual, lessThanOrEqual);
             var parameterInColumnIsBetweenValues = Expression.Lambda<Func<Table, bool>>(inRange, parameter);
 
-            return _context.Set<Table>()
-                .Where(parameterInColumnIsBetweenValues)
-                .ToList();
+            return _context.Set<Table>().Where(parameterInColumnIsBetweenValues).ToList();
         }
     }
 }
