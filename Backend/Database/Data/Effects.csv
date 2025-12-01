@@ -1,1 +1,4 @@
-Id|Title|Description|TypeId|Amount
+Id|Title|Description|TypeId|Amount|isActive|isAoe
+Shoot|Shoot|Shooting Something peew pew|Attack|40|True|False
+Fireworks|Fireworks|Wow so pretty|Attack|20|True|True
+Exploding|Explodes|Bum!!!|Attack|30|True|True
