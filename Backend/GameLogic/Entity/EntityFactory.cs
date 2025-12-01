@@ -13,11 +13,15 @@ namespace Backend.GameLogic.Entity
             List<IItem> items = new List<IItem>();
             IItemFactory itemFactory = new ItemFactory();
             items.Add(itemFactory.Create(enemyStats.Weapon, game));
-            foreach(LootOnEnemy item in enemyStats.Loot)
+            if(enemyStats.Loot != null)
             {
-                items.Add(itemFactory.Create(item.Item, game));
+                foreach (LootOnEnemy item in enemyStats.Loot)
+                {
+                    items.Add(itemFactory.Create(item.Item, game));
+                }
             }
-            IEntity entity = new EntityImpl(" ", 10, enemyStats.Title, 0, enemyStats.Title, enemyStats.Description, " ", 0, items, 10);
+            
+            IEntity entity = new EntityImpl(enemyStats.Type.Title, 10, enemyStats.Title, 0, enemyStats.Title, enemyStats.Description, " ", 0, items, 10);
             return entity;
         }
     }
