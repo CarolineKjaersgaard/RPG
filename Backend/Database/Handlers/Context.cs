@@ -19,7 +19,6 @@ namespace Backend.Database.Handlers
         public DbSet<ItemType> ItemTypes {get; set;}
         public DbSet<EnemyType> EnemyTypes {get; set;}
         public DbSet<EffectType> EffectTypes {get; set;}
-        public DbSet<TargetType> TargetTypes {get; set;}
         public DbSet<EnemyInRoom> EnemiesInRooms {get; set;}
         public DbSet<LootInRoom> LootInRooms {get; set;}
         public DbSet<LootOnEnemy> LootOnEnemies {get; set;}
@@ -36,7 +35,6 @@ namespace Backend.Database.Handlers
             modelBuilder.Entity<ItemType>().HasKey(p => p.Id);
             modelBuilder.Entity<EnemyType>().HasKey(p => p.Id);
             modelBuilder.Entity<EffectType>().HasKey(p => p.Id);
-            modelBuilder.Entity<TargetType>().HasKey(p => p.Id);
             modelBuilder.Entity<EnemyInRoom>().HasKey(p => p.Id);
             modelBuilder.Entity<LootInRoom>().HasKey(p => p.Id);
             modelBuilder.Entity<LootOnEnemy>().HasKey(p => p.Id);
@@ -54,7 +52,11 @@ namespace Backend.Database.Handlers
             modelBuilder.Entity<ItemType>().HasMany(i => i.Items).WithOne(t => t.Type).HasForeignKey(t => t.TypeId);
             modelBuilder.Entity<EnemyType>().HasMany(e => e.Enemies).WithOne(t => t.Type).HasForeignKey(t => t.TypeId);
             modelBuilder.Entity<EffectType>().HasMany(e => e.Effects).WithOne(t => t.Type).HasForeignKey(t => t.TypeId);
-            modelBuilder.Entity<TargetType>().HasMany(e => e.EffectTypes).WithOne(t => t.TargetType).HasForeignKey(t => t.TargetTypeId);
+        }
+
+        public DbSet<Room> GetSet()
+        {
+            return Rooms;
         }
     }
 }
