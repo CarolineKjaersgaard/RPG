@@ -64,6 +64,18 @@ public class GameAPI : ControllerBase, IGameAPI
     {
         List<IItem> res = game.LootCurrentRoom();
         Dictionary<string, object> returnValues = new Dictionary<string, object>();
+        foreach (IItem item in res)
+        {
+            Dictionary<string, object> values = item.GetDictionaryRepresentation();
+            string key = item.GetName();
+            int count = 1;
+            while(returnValues.ContainsKey(key))
+            {
+                key = item.GetName() + count;
+                count++;
+            }
+            returnValues.Add(key, values);
+        }
         return Ok(res);
     }
 
