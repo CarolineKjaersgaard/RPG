@@ -145,7 +145,7 @@ namespace Backend.GameLogic.Game
 
         public (bool, IPlayer) StartGame()
         {
-            List<Room> rooms = database.GetItems<Room>("", "");
+            List<Room> rooms = new List<Room>() {database.GetItem<Room>() };
             if(rooms.Count == 0)
             {
                 rooms.Add(new Room() { Id = "0", Description = "this room should not appear", Title = "test room", Type = new RoomType() { Id = "0", Title = "test room" }, TypeId = "0", MinDoors = 1, MaxDoors = 4, Rarity = 10, Difficulty = 10 });
@@ -158,7 +158,7 @@ namespace Backend.GameLogic.Game
         {
             if(enemies.Count == 0)
             {
-                enemies = database.GetItems<Enemy>("", "");
+                enemies = database.GetItems<Enemy>();
                 if(enemies.Count == 0)
                 {
                     enemies.Add(new Enemy() { Description = "this enemy should not appear", Id = "0", Title = "test enemy", Type = new EnemyType() {Id = "0", Title = "test enemy" }, TypeId = "0", WeaponId = "0", Weapon = new Item() { Description = "this item should not appear", Id = "0", Title = "test item", Type = new ItemType() { Id = "0", Title = "test item" }, TypeId = "0", Rarity = 10, isLootable = true }, Difficulty = 5, PackSize = 2 });
@@ -171,7 +171,7 @@ namespace Backend.GameLogic.Game
         {
             if(Items.Count == 0)
             {
-                Items = database.GetItems<Item>("", "");
+                Items = database.GetItems<Item>();
                 if(Items.Count == 0)
                 {
                     Items.Add(new Item() { Description = "this item should not appear", Id = "0", Title = "test item", Type = new ItemType() {Id = "0", Title = "test item" }, TypeId = "0", Rarity = 10, isLootable = true });
