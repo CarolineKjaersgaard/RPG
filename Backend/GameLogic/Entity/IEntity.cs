@@ -32,5 +32,7 @@ namespace Backend.GameLogic.Entity
 
         public int GetDamageMod();
         public void UpdateDamageMod(int amount);
+        public void SetName(string name);
+        public Dictionary<string, object> GetDictionaryRepresentation();
     }
 }

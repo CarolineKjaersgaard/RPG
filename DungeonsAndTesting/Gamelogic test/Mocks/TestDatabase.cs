@@ -24,17 +24,27 @@ namespace DungeonsAndTesting.Gamelogic_test.Mocks
             return new List<Table>();
         }
 
-        Table IDatabase.GetItem<Table>(string id)
+        Table IDatabase.GetItem<Table>(string id) where Table : class
         {
             throw new NotImplementedException();
         }
 
-        List<Table> IDatabase.GetItems<Table>(object value, string column)
+        List<Table> IDatabase.GetItems<Table>(object value, string column) where Table : class
         {
             return new List<Table>();
         }
 
-        List<Table> IDatabase.GetItems<Table>(int lowerValue, int upperValue, string column)
+        List<Table> IDatabase.GetItems<Table>(int lowerValue, int upperValue, string column) where Table : class
+        {
+            return new List<Table>();
+        }
+
+        Table IDatabase.GetItem<Table>() where Table : class
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Table> IDatabase.GetItems<Table>() where Table : class
         {
             return new List<Table>();
         }

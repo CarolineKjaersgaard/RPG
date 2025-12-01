@@ -70,5 +70,14 @@ namespace Backend.GameLogic.ItemImpl
         {
             return itemType;
         }
+
+        public Dictionary<string, object> GetDictionaryRepresentation()
+        {
+            Dictionary<string, object> dictionaryRepresentation = new Dictionary<string, object>()
+            {
+                { "title", Title }
+            };
+            return dictionaryRepresentation;
+        }
     }
 }

@@ -23,4 +23,6 @@ public interface IGame
     public List<Enemy> GetEnemies();
 
     public List<Item> GetItems();
+
+    public Dictionary<(int, int), IRoom> GetMap();
 }

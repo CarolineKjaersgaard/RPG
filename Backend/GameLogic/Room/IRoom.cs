@@ -11,5 +11,8 @@ namespace Backend.GameLogic
         public List<IItem> GetItems();
         public void SetEffect(IEffect effect);
         public IEffect GetEffect();
+
+        public bool HasDoor((int, int) coords);
+        public void SetDoors(Dictionary<(int, int), bool> doors);
     }
 }
