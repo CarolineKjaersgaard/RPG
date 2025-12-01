@@ -5,6 +5,7 @@ namespace Backend.Database
 {
     public interface IDatabase
     {
+        public Table GetItem<Table>() where Table: class, ITable;
         public Table GetItem<Table>(string id) where Table: class, ITable;
 
         public List<Table> GetItems<Table>() where Table: class, ITable;
