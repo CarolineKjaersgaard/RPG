@@ -86,11 +86,23 @@ namespace Backend.GameLogic.Player
                 {"name", GetName() },
                 {"health", GetHealth() },
                 {"max health", GetMaxHealth() },
-                {"inventory", GetItems() },
+                {"last action", lastAction },
+                {"defense", defense },
+                {"current coordinates", $"({currentCoords.Item1}, {currentCoords.Item2})" },
+                {"actions", GetEffectDictionaryRepresentation() },
+                {"inventory", GetItems() }
 
             };
             return playerValues;
         }
+
+        public Dictionary<string, object> GetEffectDictionaryRepresentation()
+        {
+            Dictionary<string, object> EffectDictionaryRepresentation = new Dictionary<string, object>()
+            { };
+            return EffectDictionaryRepresentation;
+        }
+
 
         public List<string> GetEffectNames()
         {
