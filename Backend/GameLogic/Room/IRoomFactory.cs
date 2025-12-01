@@ -4,6 +4,6 @@ namespace Backend.GameLogic
 {
     public interface IRoomFactory
     {
-        public IRoom CreateRoom(Room roomStats);
+        public IRoom CreateRoom(Room roomStats, IGame game);
     }
 }

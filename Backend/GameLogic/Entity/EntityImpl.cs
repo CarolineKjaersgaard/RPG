@@ -1,8 +1,8 @@
 using System.Reflection.Metadata.Ecma335;
-using Backend.GameLogic.Effect;
-using Backend.GameLogic.Effect.ActiveEffect;
-using Backend.GameLogic.Effect.PassiveEffect;
-using Backend.GameLogic.Item;
+using Backend.GameLogic.EffectImpl;
+using Backend.GameLogic.EffectImpl.ActiveEffect;
+using Backend.GameLogic.EffectImpl.PassiveEffect;
+using Backend.GameLogic.ItemImpl;
 
 namespace Backend.GameLogic.Entity
 {
@@ -40,6 +40,11 @@ namespace Backend.GameLogic.Entity
             foreach (IItem item in items)
             {
                 AddItem(item);
+                IList<IPassiveEffect> effects = item.GetPassiveEffects();
+                foreach(IActiveEffect activeEffect in item.GetActiveEffects())
+                {
+                    activeEffect.SetOwner(this);
+                }
             }
 
             this.defense = defense;

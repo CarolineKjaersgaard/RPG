@@ -1,7 +1,7 @@
 ﻿using Backend.Database;
 using Backend.Database.Tables;
 using Backend.GameLogic.Entity;
-using Backend.GameLogic.Item;
+using Backend.GameLogic.ItemImpl;
 using Backend.GameLogic.Player;
 
 namespace Backend.GameLogic.Game
@@ -13,6 +13,8 @@ namespace Backend.GameLogic.Game
         public IPlayer player;
         private IDatabase database;
         private Random rnd;
+        private List<Enemy> enemies = new List<Enemy>();
+        private List<Item> Items = new List<Item>();
         public Game(IPlayer player, IDatabase database)
         {
             this.player = player;
@@ -76,7 +78,7 @@ namespace Backend.GameLogic.Game
             int chosenRoom = rnd.Next(0, rooms.Count);
             Room roomStats = rooms[chosenRoom];
             RoomFactory roomFactory = new RoomFactory();
-            IRoom room = roomFactory.CreateRoom(roomStats);
+            IRoom room = roomFactory.CreateRoom(roomStats, this);
             map.Add(coords, room);
             return room;
         }
@@ -149,6 +151,24 @@ namespace Backend.GameLogic.Game
                 CreateRoom(player.GetCoords(), rooms);
             }
             return (true, player);
+        }
+
+        public List<Enemy> GetEnemies()
+        {
+            if(enemies.Count == 0)
+            {
+                enemies = database.GetItems<Enemy>("", "");
+            }
+            return enemies;
+        }
+
+        public List<Item> GetItems()
+        {
+            if(Items.Count == 0)
+            {
+                Items = database.GetItems<Item>("", "");
+            }
+            return Items;
         }
     }
 }

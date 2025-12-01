@@ -1,8 +1,8 @@
-﻿using Backend.GameLogic.Effect;
-using Backend.GameLogic.Effect.ActiveEffect;
-using Backend.GameLogic.Effect.PassiveEffect;
+﻿using Backend.GameLogic.EffectImpl;
+using Backend.GameLogic.EffectImpl.ActiveEffect;
+using Backend.GameLogic.EffectImpl.PassiveEffect;
 using Backend.GameLogic.Entity;
-using Backend.GameLogic.Item;
+using Backend.GameLogic.ItemImpl;
 
 namespace Backend.GameLogic.Player
 {

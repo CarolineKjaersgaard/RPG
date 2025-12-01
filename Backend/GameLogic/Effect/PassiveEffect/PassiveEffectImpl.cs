@@ -1,8 +1,8 @@
 using Backend.GameLogic.Entity;
 
-namespace Backend.GameLogic.Effect.PassiveEffect
+namespace Backend.GameLogic.EffectImpl.PassiveEffect
 {
-    public class PassiveEffect : IPassiveEffect
+    public class PassiveEffectImpl : IPassiveEffect
     {
         string title;
         string desc;
@@ -13,7 +13,7 @@ namespace Backend.GameLogic.Effect.PassiveEffect
         IEntity? activeTarget;
         int oldValue;
 
-        public PassiveEffect(string title, string desc, string icon, string buffType, int amount, string stat)
+        public PassiveEffectImpl(string title, string desc, string icon, string buffType, int amount, string stat)
         {
             this.title = title;
             this.desc = desc;
