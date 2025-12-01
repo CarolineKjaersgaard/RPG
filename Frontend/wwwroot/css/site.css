@@ -93,7 +93,7 @@ input[type=checkbox]#inventoryCheckBox {
 }
 
 input[type=checkbox]#inventoryCheckBox + .inventoryContainer {
-    right: -100%;
+    left: 100%;
 }
 
 input[type=checkbox]#inventoryCheckBox:checked + .inventoryContainer {
@@ -108,19 +108,25 @@ input[type=checkbox]#inventoryCheckBox label.inventoryCheckBox {
     background-color: var(--block-background-colour);
     color: var(--text-emphasis-blue);
     padding: var(--margin-standard);
+    right: 100%;
 }
 
 input[type=checkbox]#inventoryCheckBox + .inventoryContainer .inventoryBlockerDiv {
     display: none;
-}
-
-input[type=checkbox]#inventoryCheckBox:checked + .inventoryContainer .inventoryBlockerDiv {
     z-index: calc(var(--zindex-per-item-base) - 1);
     position: absolute;
     width: 100vw;
     height: 100vh;
     background-color: var(--main-background-colour);
     opacity: 0.3;
+}
+
+input[type=checkbox]#inventoryCheckBox:checked + .inventoryContainer .inventoryBlockerDiv {
+    display: block;
+}
+
+input[type=radio] {
+    display: none;
 }
 
 
