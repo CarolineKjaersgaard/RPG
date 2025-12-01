@@ -9,12 +9,16 @@ using Backend.Database.Handlers;
 
 namespace Backend.Database
 {
-    public class Database
+    public class Database : IDatabase
     {
         public Context _context;
         public Database()
         {
-            
+            var options = new DbContextOptionsBuilder<Context>()
+                .UseSqlite("Data Source=database.db")
+                .Options;
+            _context = new Context(options);
+            _context.Database.EnsureCreated();
 
             Parser parser = new Parser();
             Seeder seeder = new Seeder(_context, parser);
@@ -32,7 +36,12 @@ namespace Backend.Database
         }
         public Table GetItem<Table>(string id) where Table: class, ITable
         {
-            return _context.Set<Table>().Find(id);
+            Table? item = _context.Set<Table>().Find(id);
+            if (item == null)
+            {
+                throw new KeyNotFoundException($"Item of type '{typeof(Table).Name}' with Id '{id}' was not found.");
+            }
+            return item;
         }
 
         public List<Table> GetItems<Table>(object value, string column) where Table : class, ITable
@@ -48,7 +57,7 @@ namespace Backend.Database
                 .ToList();
         }
 
-        public List<Table> GetItems<Table>(int lowerValue, int upperValue, string collumn) where Table: ITable
+        public List<Table> GetItems<Table>(int lowerValue, int upperValue, string collumn) where Table: class, ITable
         {
             return new List<Table>();
         }
