@@ -15,6 +15,7 @@ namespace Backend.Database
         public Context _context;
         public Database()
         {
+            Console.WriteLine("*-*--------makes context----------*-*");
             var options = new DbContextOptionsBuilder<Context>()
                 .UseSqlite("Data Source=database.db")
                 .Options;
@@ -23,14 +24,19 @@ namespace Backend.Database
 
             Parser parser = new Parser();
             Seeder seeder = new Seeder(_context, parser);
-            seeder.SeedRooms("Database/Data/Rooms.csv");
-            seeder.SeedItems("Database/Data/Items.csv");
-            seeder.SeedEnemies("Database/Data/Enemies.csv");
-            seeder.SeedEffects("Database/Data/Effects.csv");
+
+            Console.WriteLine("*-*--------calls seeder----------*-*");
+            Console.WriteLine(Path.GetFullPath("Database/Data/Types/ItemTypes.csv"));
             seeder.SeedRoomTypes("Database/Data/Types/RoomTypes.csv");
             seeder.SeedItemTypes("Database/Data/Types/ItemTypes.csv");
             seeder.SeedEnemyTypes("Database/Data/Types/EnemyTypes.csv");
             seeder.SeedEffectTypes("Database/Data/Types/EffectTypes.csv");
+
+            seeder.SeedRooms("Database/Data/Rooms.csv");
+            seeder.SeedItems("Database/Data/Items.csv");
+            seeder.SeedEnemies("Database/Data/Enemies.csv");
+            seeder.SeedEffects("Database/Data/Effects.csv");
+
             seeder.SeedEnemiesInRooms("Database/Data/Connections/EnemiesInRooms.csv");
             seeder.SeedLootInRooms("Database/Data/Connections/LootInRooms.csv");
             seeder.SeedLootOnEnemies("Database/Data/Connections/LootOnEnemies.csv");
