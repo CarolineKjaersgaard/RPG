@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Backend.Database.Tables;
 using Backend.Database.Handlers;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Backend.Database
 {
@@ -22,17 +23,26 @@ namespace Backend.Database
 
             Parser parser = new Parser();
             Seeder seeder = new Seeder(_context, parser);
-            seeder.SeedRooms("Data/Rooms.csv");
-            seeder.SeedItems("Data/Items.csv");
-            seeder.SeedEnemies("Data/Enemies.csv");
-            seeder.SeedEffects("Data/Effects.csv");
-            seeder.SeedRoomTypes("Data/RoomTypes.csv");
-            seeder.SeedItemTypes("Data/ItemTypes.csv");
-            seeder.SeedEnemyTypes("Data/EnemyTypes.csv");
-            seeder.SeedEffectTypes("Data/EffectTypes.csv");
-            seeder.SeedEnemiesInRooms("Data/EnemiesInRooms.csv");
-            seeder.SeedLootInRooms("Data/LootInRooms.csv");
-            seeder.SeedLootOnEnemies("Data/LootOnEnemies.csv");
+            seeder.SeedRooms("Database/Data/Rooms.csv");
+            seeder.SeedItems("Database/Data/Items.csv");
+            seeder.SeedEnemies("Database/Data/Enemies.csv");
+            seeder.SeedEffects("Database/Data/Effects.csv");
+            seeder.SeedRoomTypes("Database/Data/Types/RoomTypes.csv");
+            seeder.SeedItemTypes("Database/Data/Types/ItemTypes.csv");
+            seeder.SeedEnemyTypes("Database/Data/Types/EnemyTypes.csv");
+            seeder.SeedEffectTypes("Database/Data/Types/EffectTypes.csv");
+            seeder.SeedEnemiesInRooms("Database/Data/Connections/EnemiesInRooms.csv");
+            seeder.SeedLootInRooms("Database/Data/Connections/LootInRooms.csv");
+            seeder.SeedLootOnEnemies("Database/Data/Connections/LootOnEnemies.csv");
+        }
+        public Table GetItem<Table>() where Table: class, ITable
+        {    
+            var item = _context.Set<Table>().OrderBy(e => EF.Functions.Random()).FirstOrDefault();
+            if (item == null)
+            {
+                throw new InvalidOperationException($"No items found for type '{typeof(Table).Name}'.");
+            }
+            return item;
         }
         public Table GetItem<Table>(string id) where Table: class, ITable
         {
@@ -43,6 +53,10 @@ namespace Backend.Database
             }
             return item;
         }
+        public List<Table> GetItems<Table>() where Table: class, ITable
+        {
+            return _context.Set<Table>().ToList();
+        }
 
         public List<Table> GetItems<Table>(object value, string column) where Table : class, ITable
         {
@@ -52,9 +66,7 @@ namespace Backend.Database
             var equality = Expression.Equal(property, constant);
             var parameterInColumnIsValue = Expression.Lambda<Func<Table, bool>>(equality, parameter);
 
-            return _context.Set<Table>()
-                .Where(parameterInColumnIsValue)
-                .ToList();
+            return _context.Set<Table>().Where(parameterInColumnIsValue).ToList();
         }
 
         public List<Table> GetItems<Table>(int lowerValue, int upperValue, string column) where Table: class, ITable
@@ -68,9 +80,7 @@ namespace Backend.Database
             var inRange = Expression.AndAlso(greaterThanOrEqual, lessThanOrEqual);
             var parameterInColumnIsBetweenValues = Expression.Lambda<Func<Table, bool>>(inRange, parameter);
 
-            return _context.Set<Table>()
-                .Where(parameterInColumnIsBetweenValues)
-                .ToList();
+            return _context.Set<Table>().Where(parameterInColumnIsBetweenValues).ToList();
         }
     }
 }
