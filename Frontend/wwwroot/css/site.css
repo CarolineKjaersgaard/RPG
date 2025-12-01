@@ -27,6 +27,7 @@ html {
     position: relative;
     min-height: 100vh;
     font-size: 16px;
+    font-family: var(--main-font-family);
 }
 
 
@@ -85,6 +86,10 @@ input[type=checkbox]#inventoryCheckBox {
     z-index: var(--zindex-per-item-base);
     background-color: var(--block-background-colour);
     color: var(--block-text-colour)
+}
+
+.inventoryItem {
+    padding: var(--margin-standard);
 }
 
 input[type=checkbox]#inventoryCheckBox + .inventoryContainer {
