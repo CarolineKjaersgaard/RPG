@@ -14,6 +14,7 @@ namespace Backend.GameLogic.ItemImpl
         public bool CanBeLooted();
 
         public string GetItemType();
+        public Dictionary<string, object> GetDictionaryRepresentation();
 
     }
 }

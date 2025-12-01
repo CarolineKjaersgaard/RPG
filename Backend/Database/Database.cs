@@ -46,14 +46,14 @@ namespace Backend.Database
 
         public List<Table> GetItems<Table>(object value, string column) where Table : class, ITable
         {
-            var parameter = Expression.Parameter(typeof(Table), "entity");
+            /*var parameter = Expression.Parameter(typeof(Table), "entity");
             var property = Expression.Property(parameter, column);
             var constant = Expression.Constant(value);
             var equality = Expression.Equal(property, constant);
-            var parameterInColumnIsValue = Expression.Lambda<Func<Table, bool>>(equality, parameter);
+            var parameterInColumnIsValue = Expression.Lambda<Func<Table, bool>>(equality, parameter);*/
 
             return _context.Set<Table>()
-                .Where(parameterInColumnIsValue)
+                /*.Where(parameterInColumnIsValue)*/
                 .ToList();
         }
 
