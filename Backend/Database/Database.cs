@@ -50,16 +50,27 @@ namespace Backend.Database
             var property = Expression.Property(parameter, column);
             var constant = Expression.Constant(value);
             var equality = Expression.Equal(property, constant);
-            var lambda = Expression.Lambda<Func<Table, bool>>(equality, parameter);
+            var parameterInColumnIsValue = Expression.Lambda<Func<Table, bool>>(equality, parameter);
 
             return _context.Set<Table>()
-                .Where(lambda)
+                .Where(parameterInColumnIsValue)
                 .ToList();
         }
 
-        public List<Table> GetItems<Table>(int lowerValue, int upperValue, string collumn) where Table: class, ITable
+        public List<Table> GetItems<Table>(int lowerValue, int upperValue, string column) where Table: class, ITable
         {
-            return new List<Table>();
+            var parameter = Expression.Parameter(typeof(Table), "entity");
+            var property = Expression.Property(parameter, column);
+            var lowerConstant = Expression.Constant(lowerValue);
+            var upperConstant = Expression.Constant(upperValue);
+            var greaterThanOrEqual = Expression.GreaterThanOrEqual(property, lowerConstant);
+            var lessThanOrEqual = Expression.LessThanOrEqual(property, upperConstant);
+            var inRange = Expression.AndAlso(greaterThanOrEqual, lessThanOrEqual);
+            var parameterInColumnIsBetweenValues = Expression.Lambda<Func<Table, bool>>(inRange, parameter);
+
+            return _context.Set<Table>()
+                .Where(parameterInColumnIsBetweenValues)
+                .ToList();
         }
     }
 }
