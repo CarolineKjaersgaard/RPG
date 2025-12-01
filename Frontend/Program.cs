@@ -1,5 +1,5 @@
 using API;
-using Backend.Database.DatabaseHandlers;
+using Backend.Database.Handlers;
 using Backend.GameLogic.Game;
 using Backend.GameLogic.Player;
 using Backend.Database;

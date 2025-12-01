@@ -1,8 +1,8 @@
 using Backend.Database;
 using Backend.GameLogic;
-using Backend.GameLogic.Effect.ActiveEffect;
+using Backend.GameLogic.EffectImpl.ActiveEffect;
 using Backend.GameLogic.Game;
-using Backend.GameLogic.Item;
+using Backend.GameLogic.ItemImpl;
 using Backend.GameLogic.Player;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;

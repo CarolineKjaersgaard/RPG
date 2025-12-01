@@ -13,9 +13,9 @@ namespace Backend.GameLogic.Entity
             List<IItem> items = new List<IItem>();
             IItemFactory itemFactory = new ItemFactory();
             items.Add(itemFactory.Create(enemyStats.Weapon, game));
-            foreach(Item item in enemyStats.Loot)
+            foreach(LootOnEnemy item in enemyStats.Loot)
             {
-                items.Add(itemFactory.Create(item, game));
+                items.Add(itemFactory.Create(item.Item, game));
             }
             IEntity entity = new EntityImpl(" ", 10, enemyStats.Title, 0, enemyStats.Title, enemyStats.Description, " ", 0, items, 10);
             return entity;
