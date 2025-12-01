@@ -29,9 +29,26 @@ namespace Frontend.Controllers
         [HttpPost]
         public IActionResult Start()
         {
-            //var result = _api.StartGame();
-            return RedirectToAction("RoomScreen");
-            //return result;
+            var result = _api.StartGame();
+
+            if (result is OkObjectResult okResult)
+            {
+                var data = okResult.Value as Dictionary<string, object>;
+
+                if (data != null && data.TryGetValue("result", out var successObj) && (bool)successObj)
+                {
+                    var roomResult = _api.EnterRoom(0, 0);
+                    Console.WriteLine(roomResult);
+                    return RedirectToAction("RoomScreen");
+                } else
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                return View();
+            }
         }
 
         [HttpPost]
