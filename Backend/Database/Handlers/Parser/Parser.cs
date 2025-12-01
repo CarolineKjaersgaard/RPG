@@ -1,4 +1,5 @@
 using CsvHelper;
+using CsvHelper.Configuration;
 using System.Globalization;
 using Backend.Database.Tables;
 
@@ -10,8 +11,13 @@ namespace Backend.Database.Handlers
         {
             try
             {
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    Delimiter = "|",
+                    HasHeaderRecord = true 
+                };
                 using var reader = new StreamReader(filePath);
-                using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+                using var csv = new CsvReader(reader, config);
                 return csv.GetRecords<Table>().ToList();
             }
             catch
