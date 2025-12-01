@@ -9,17 +9,17 @@ namespace Backend.GameLogic.EffectImpl
         public IEffect CreateEffect(Effect effectStats)
         {
             IEffect effect;
-            if(effectStats.isActive && effectStats.EffectType.Title == "healing")
+            if(effectStats.Type.Title == "healing")
             {
-                effect = new Heal(effectStats.EffectType.Title, effectStats.Description, effectStats.Title, 0, effectStats.Amount, effectStats.isAoe);
+                effect = new Heal(effectStats.Type.Title, effectStats.Description, effectStats.Title, 0, effectStats.Amount, false);
             }
-            else if(effectStats.isActive)
+            else if(effectStats.Type.Title == "attack")
             {
-                effect = new Attack(effectStats.EffectType.Title, effectStats.Description, effectStats.Title, 0, effectStats.Amount, effectStats.isAoe);
+                effect = new Attack(effectStats.Type.Title, effectStats.Description, effectStats.Title, 0, effectStats.Amount, false);
             }
             else
             {
-                effect = new PassiveEffectImpl(effectStats.Title, effectStats.Description, " ", " ", effectStats.Amount, effectStats.TargetType.Title);
+                effect = new PassiveEffectImpl(effectStats.Title, effectStats.Description, " ", " ", effectStats.Amount, " ");
             }
             return effect;
         }

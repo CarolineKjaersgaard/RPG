@@ -11,7 +11,7 @@ public interface IGameAPI
 
     public IActionResult ExecuteEffect(string effect);
 
-    public IActionResult EndEffect(string effect);
+    public IActionResult EndEffect(string effect);*/
 
-    public IActionResult EndGame();*/
+    public IActionResult EndGame();
 }
