@@ -71,36 +71,13 @@ namespace Backend.Database.Handlers
             foreach (var row in rows)
             {
                 var existing = _context.EffectTypes.Find(row.Id);
-                var hasTarget = _context.TargetTypes.Find(row.TargetTypeId);
-                if (existing == null && hasTarget != null)
+                if (existing == null)
                 {
                     _context.EffectTypes.Add(row);
                 }
-                else if (hasTarget != null) 
-                {
-                    
-                }
                 else
                 {
-                    
-                }
-            }
-            _context.SaveChanges();
-        }
-
-        public void SeedTargetTypes(string filePath)
-        {
-            List<TargetType> rows = _parser.Parse<TargetType>(filePath);
-            foreach (var row in rows)
-            {
-                var existing = _context.TargetTypes.Find(row.Id);
-                if (existing == null)
-                {
-                    _context.TargetTypes.Add(row);
-                }
-                else
-                {
-                    _context.Entry(existing).CurrentValues.SetValues(row);
+                     _context.Entry(existing).CurrentValues.SetValues(row);
                 }
             }
             _context.SaveChanges();
