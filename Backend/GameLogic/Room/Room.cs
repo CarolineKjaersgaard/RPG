@@ -73,6 +73,7 @@ namespace Backend.GameLogic
                     key = entity.GetName() + count;
                     count++;
                 }
+                entity.SetName(key);
                 enemyDisplayList.Add(key, entity.GetDictionaryRepresentation());
             }
             return enemyDisplayList;

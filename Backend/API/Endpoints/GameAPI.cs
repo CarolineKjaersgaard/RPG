@@ -32,8 +32,8 @@ public class GameAPI : ControllerBase, IGameAPI
             {"result", res.Item1},
             {"Player", res.Item2.GetDictionaryRepresentation()}
         };
-        return EnterRoom(0, 0);
-        //return Ok(returnValues);
+   
+        return Ok(returnValues);
     }
 
     [HttpPut(Name = "EnterRoom")]
@@ -76,7 +76,7 @@ public class GameAPI : ControllerBase, IGameAPI
             }
             returnValues.Add(key, values);
         }
-        return Ok(res);
+        return Ok(returnValues);
     }
 
     [HttpDelete(Name = "EndGame")]
