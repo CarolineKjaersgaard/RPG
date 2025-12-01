@@ -1,0 +1,29 @@
+﻿@using Backend.GameLogic.Player
+@using Backend.GameLogic.EffectImpl
+@Model Backend.GameLogic.Player.PlayerImpl
+
+
+<section class="buttonsList flex flex-horizontal">
+    <header>
+        <h3>Actions</h3>
+    </header>
+
+    @if (true /*is in combat*/) {
+        @foreach (IEffect effect in Model.effect) {
+            @section Button {
+                @await Html.PartialAsync("Button.cshtml", (IEffect) effect);
+            }
+
+            @await RenderSectionAsync("Button", required: true);
+        }
+    }
+
+    <script>
+        async function performAction(var action) {
+            var response = await fetch('/buttonAction?action=' + action);
+            if (response.ok) {
+                window.location.reload;
+            }
+        }
+    </script>
+</section>

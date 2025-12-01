@@ -1,0 +1,11 @@
+﻿@using Backend.GameLogic.ItemImpl
+@using Backend.GameLogic.EffectImpl
+@Model Backend.GameLogic.EffectImpl.IEffect
+
+<div>
+    <button onclick="performAction(@Model.Title)">
+        <h3 class="title">@Model.Title</h3>
+
+        <p class="description">@Model.Description</p>
+    </button>
+</div>

@@ -1,0 +1,23 @@
+﻿@using Backend.GameLogic.Player
+@using Backend.GameLogic.ItemImpl
+@Model Backend.GameLogic.Player.PlayerImpl
+
+<div>
+    <label for="inventoryCheckBox" class="inventoryCheckBox">
+        <p>&#9776;</p>
+
+        <div class="inventoryBlockerDiv"></div>
+    </label>
+
+    <div class="flex flex-horizontal">
+        <div>
+            @foreach (IItem item in Model.inventory) {
+                @section InventoryItem {
+                    @await Html.PartialAsync("InventoryItem.cshtml", item)
+                }
+
+                @await RenderSectionAsync("InventoryItem", required: true)
+            }
+        </div>
+    </div>
+</div>

@@ -6,13 +6,9 @@ namespace Backend.Database.Tables {
 {
     public required string Id { get; set; }
     public required string Title { get; set; }
+    public bool isActive {get; set;}
+    public bool isAoe {get; set;}
+    public ICollection<Effect>? Effects {get; set;}
 
-    public List<string> GetCollumns()
-    {
-        return new List<string>
-        {
-            "Id", "Title" 
-        };
-    }
 }
 }
