@@ -8,13 +8,13 @@ namespace Backend.GameLogic
 {
     public class RoomImpl : IRoom
     {
-        string title;
+        public string title;
         bool isUnlocked;
-        string desc;
+        public string desc;
         Dictionary<(int, int), bool> doors = new Dictionary<(int, int), bool>();
-        (int, int) entryDoor = (0,0);
+        public (int, int) entryDoor = (0,0);
         IEffect? effect;
-        string image;
+        public string image;
         List<IEntity> monsters = new List<IEntity>();
         List<IItem> items = new List<IItem>();
         (int, int) coords;
@@ -55,6 +55,12 @@ namespace Backend.GameLogic
             {
                 entryDoor = index;
             }
+        }
+
+        public Dictionary<string, object> GetEnemyDisplayList()
+        {
+            Dictionary<string, object> enemyDisplayList = new Dictionary<string, object>();
+            return enemyDisplayList;
         }
     }
 }

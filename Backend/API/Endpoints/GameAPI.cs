@@ -14,9 +14,11 @@ namespace API;
 public class GameAPI : ControllerBase, IGameAPI
 {
     public static IGame game;
+    public static Database database;
 
-    public GameAPI(IDatabase database)
+    public GameAPI()
     {
+        database = new Database();
         game = new Game(database);
     }
 
@@ -46,6 +48,20 @@ public class GameAPI : ControllerBase, IGameAPI
     public IActionResult EnterRoom(int x, int y)
     {
         (IRoom, bool) res = game.EnterRoom((x, y));
+        RoomImpl room = (RoomImpl)res.Item1;
+        Dictionary<string, object> roomValues = new Dictionary<string, object>()
+        {
+            {"title", room.title},
+            {"description", room.desc },
+            {"enemies", room.GetEnemyDisplayList() },
+
+        };
+        Dictionary<string, object> returnValues = new Dictionary<string, object>()
+        {
+            { "result", res.Item2 },
+            {"room", roomValues }
+        };
+
         return Ok(res);
     }
 
