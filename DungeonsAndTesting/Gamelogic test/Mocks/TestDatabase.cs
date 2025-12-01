@@ -41,7 +41,8 @@ namespace DungeonsAndTesting.Gamelogic_test.Mocks
 
         Table IDatabase.GetItem<Table>() where Table : class
         {
-            throw new NotImplementedException();
+            return null;
+            
         }
 
         List<Table> IDatabase.GetItems<Table>() where Table : class
