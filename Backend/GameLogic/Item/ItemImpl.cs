@@ -75,8 +75,32 @@ namespace Backend.GameLogic.ItemImpl
         {
             Dictionary<string, object> dictionaryRepresentation = new Dictionary<string, object>()
             {
-                { "title", Title }
+                { "title", Title },
+                {"description", description },
+                {"rarity", rarity },
+                {"item type", itemType },
+                {"active effects", GetActiveEffectDictionaryRepresentation()  },
+                {"passive effects", GetPassiveEffectDictionaryRepresentation() }
             };
+            return dictionaryRepresentation;
+        }
+
+        private Dictionary<string, object> GetActiveEffectDictionaryRepresentation()
+        {
+            Dictionary<string, object> dictionaryRepresentation = new Dictionary<string, object>();
+            foreach(IActiveEffect activeEffect in activeEffects)
+            {
+                dictionaryRepresentation.Add(activeEffect.GetName(), activeEffect.GetDictionaryReresentation());
+            }
+            return dictionaryRepresentation;
+        }
+        private Dictionary<string, object> GetPassiveEffectDictionaryRepresentation()
+        {
+            Dictionary<string, object> dictionaryRepresentation = new Dictionary<string, object>();
+            foreach (IPassiveEffect passiveEffect in passiveEffects)
+            {
+                dictionaryRepresentation.Add(passiveEffect.GetName(), passiveEffect.GetDictionaryReresentation());
+            }
             return dictionaryRepresentation;
         }
     }
