@@ -11,10 +11,7 @@ namespace DungeonsAndTesting.Gamelogic_test.Mocks
     public class TestDatabase : IDatabase
     {
         List<Room> rooms = new List<Room>();
-        public Table GetItem<Table>(string id) where Table : ITable
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public List<Table> GetItems<Table>(string value, string collumn) where Table : ITable
         {
@@ -24,12 +21,22 @@ namespace DungeonsAndTesting.Gamelogic_test.Mocks
 
         public List<Table> GetItems<Table>(int value, string collumn) where Table : ITable
         {
+            return new List<Table>();
+        }
+
+        Table IDatabase.GetItem<Table>(string id)
+        {
             throw new NotImplementedException();
         }
 
-        public List<Table> GetItems<Table>(int lowerValue, int upperValue, string collumn) where Table : ITable
+        List<Table> IDatabase.GetItems<Table>(object value, string column)
         {
-            throw new NotImplementedException();
+            return new List<Table>();
+        }
+
+        List<Table> IDatabase.GetItems<Table>(int lowerValue, int upperValue, string column)
+        {
+            return new List<Table>();
         }
     }
 }

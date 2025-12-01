@@ -4,12 +4,12 @@ namespace Backend.GameLogic.EffectImpl.ActiveEffect
 {
     public class Attack : IActiveEffect
     {
-        string type;
-        string desc;
-        string title;
-        int AttackMod;
-        int baseDamage;
-        bool isAOE;
+        public string type;
+        public string desc;
+        public string title;
+        public int AttackMod;
+        public int baseDamage;
+        public bool isAOE;
         IEntity? owner;
 
         public Attack(string type, string desc, string title, int attackMod, int baseDamage, bool isAOE)

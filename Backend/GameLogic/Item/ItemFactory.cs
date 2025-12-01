@@ -14,7 +14,7 @@ namespace Backend.GameLogic.ItemImpl
             {
                 effectImpls.Add(effectFactory.CreateEffect(effect));
             }
-            IItem item = new ItemImpl(itemStats.Title, itemStats.Description, itemStats.Rarity, " ", itemStats.ItemType.Title, itemStats.isLootable, effectImpls);
+            IItem item = new ItemImpl(itemStats.Title, itemStats.Description, itemStats.Rarity, " ", itemStats.Type.Title, itemStats.isLootable, effectImpls);
             return item;
         }
     }
