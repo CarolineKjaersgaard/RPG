@@ -1,0 +1,33 @@
+﻿@{
+    Layout = "_Layout";
+}
+@using Backend.GameLogic.Game
+@using Backend.GameLogic
+@using Backend.GameLogic.Player
+@Model Backend.GameLogic.Game.Game
+
+@section Inventory {
+    @await Html.PartialAsync("Inventory.cshtml", (PlayerImpl) Model.player);
+}
+
+@section MainTextBox {
+    @await Html.PartialAsync("MainTextBox.cshtml", (RoomImpl) Model.currentRoom);
+}
+
+@section Map {
+    @await Html.PartialAsync("Map.cshtml", (Game) Model);
+}
+
+@section CombatButtonList {
+    @await Html.PartialAsync("CombatButtonList.cshtml", (PlayerImpl) Model.player); <!-- This should obviously be adjusted for final product -->
+}
+
+<section class="mainContainer flex flex-vertical">
+    <div class="flex flex-horizontal">
+        @await RenderSectionAsync("MainTextBox", required: true)
+
+        @await RenderSectionAsync("Map", required: true)
+    </div>
+
+    @await RenderSectionAsync("CombatButtonList", required: true)
+</section>
