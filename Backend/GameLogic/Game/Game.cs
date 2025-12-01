@@ -146,8 +146,9 @@ namespace Backend.GameLogic.Game
         public (bool, IPlayer) StartGame()
         {
             List<Room> rooms = new List<Room>() {database.GetItem<Room>() };
-            if(rooms.Count == 0)
+            if(rooms.Count == 0 || rooms[0] == null)
             {
+                rooms.Clear();
                 rooms.Add(new Room() { Id = "0", Description = "this room should not appear", Title = "test room", Type = new RoomType() { Id = "0", Title = "test room" }, TypeId = "0", MinDoors = 1, MaxDoors = 4, Rarity = 10, Difficulty = 10 });
             }
             CreateRoom(player.GetCoords(), rooms);
