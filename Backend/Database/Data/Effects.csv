@@ -1,4 +1,4 @@
-Id|Title|Description|TypeId|Amount
+Id|Title|Description|TypeId|Amount|isActive|isAoe
 RendingSwipe|Rending Swipe|A brutal swipe with its claws|Physical|50|True|False
 PlasmaShot|Plasma Shot|A blast of plasma strikes true|Ranged|25|True|False
 MindAttack|Mind Attack|Your mind unravels|Mental|30|True|True
