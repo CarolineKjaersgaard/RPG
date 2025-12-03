@@ -109,6 +109,19 @@ namespace Backend.GameLogic.Entity
             return defense;
         }
 
+        public Dictionary<string, object> GetDictionaryRepresentation()
+        {
+            Dictionary<string, object> dictionaryRepresentation = new Dictionary<string, object>()
+            {
+                {"Name", name},
+                {"description", Desc },
+                {"MaxHp", maxHealth },
+                {"hp", health },
+                {"last action", lastAction }
+            };
+            return dictionaryRepresentation;
+        }
+
         public List<string> GetEffectNames()
         {
             return effects.Keys.ToList();
@@ -137,6 +150,12 @@ namespace Backend.GameLogic.Entity
         public void SetLastAction(string action)
         {
             lastAction = action;
+        }
+
+        public void SetName(string name)
+        {
+            title = name;
+            this.name = name;
         }
 
         public void UpdateAttackMod(int amount)

@@ -5,3 +5,9 @@ MindAttack|Mind Attack|Your mind unravels|Mental|30|True|True
 Blindness|Blindness|You are blinded|Blind|1|False|False
 BlackHoleBlast|Black Hole Burst| A hole in reality opens up|Explosion|100|True|True
 MoleculeSlash|Molecular Slash|A blade slices through the air|Physical|20|True|False
+Shoot|Shoot|Shooting Something peew pew|Attack|40|True|False
+Fireworks|Fireworks|Wow so pretty|Attack|20|True|True
+Exploding|Explodes|Bum!!!|Attack|30|True|True
+CME|Coronal Mass Ejection|Tension breaking in a magnetic field holding fast impossibly hot gas, flinging it outward|Attack|45|true|false
+Heal|Healing|Replenishes health points|Attack|-120|true|false
+SimpleMelee|Simple Melee Attack|Simple melee attack|Attack|true|false

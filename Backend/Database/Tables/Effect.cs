@@ -9,6 +9,8 @@ namespace Backend.Database.Tables {
     public required string Description {get; set;}
     public required string TypeId {get; set;}
     public int Amount {get; set;}
+    public bool isActive {get; set;}
+    public bool isAoe {get; set;}
     public required EffectType Type {get; set;}
     public ICollection<Room>? Rooms {get; set;}
     public ICollection<Item>? Items {get; set;}

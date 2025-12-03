@@ -27,20 +27,12 @@ public class GameAPI : ControllerBase, IGameAPI
     {
         //object needs to be a specified model class
         (bool, IPlayer) res = game.StartGame();
-        Dictionary<string, object> playerValues = new Dictionary<string, object>()
-        {
-            {"name", res.Item2.GetName() },
-            {"health", res.Item2.GetHealth() },
-            {"max health", res.Item2.GetMaxHealth() },
-            {"inventory", res.Item2.GetItems() },
-            
-        };
         Dictionary<string, object> returnValues = new Dictionary<string, object>
         {
-            { "result", res.Item1},
-            {"Player",  playerValues}
-        };       
-
+            {"result", res.Item1},
+            {"Player", res.Item2.GetDictionaryRepresentation()}
+        };
+   
         return Ok(returnValues);
     }
 
@@ -54,22 +46,37 @@ public class GameAPI : ControllerBase, IGameAPI
             {"title", room.title},
             {"description", room.desc },
             {"enemies", room.GetEnemyDisplayList() },
+            {"items", room.GetItemDisplayList() },
+            {"doors", room.GetDoorList() }
 
         };
         Dictionary<string, object> returnValues = new Dictionary<string, object>()
         {
-            { "result", res.Item2 },
+            {"result", res.Item2 },
             {"room", roomValues }
         };
 
-        return Ok(res);
+        return Ok(returnValues);
     }
 
     [HttpGet(Name = "LootCurrentRoom")]
     public IActionResult LootCurrentRoom()
     {
         List<IItem> res = game.LootCurrentRoom();
-        return Ok(res);
+        Dictionary<string, object> returnValues = new Dictionary<string, object>();
+        foreach (IItem item in res)
+        {
+            Dictionary<string, object> values = item.GetDictionaryRepresentation();
+            string key = item.GetName();
+            int count = 1;
+            while(returnValues.ContainsKey(key))
+            {
+                key = item.GetName() + count;
+                count++;
+            }
+            returnValues.Add(key, values);
+        }
+        return Ok(returnValues);
     }
 
     [HttpDelete(Name = "EndGame")]
