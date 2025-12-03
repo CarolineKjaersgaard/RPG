@@ -26,6 +26,8 @@
 html {
     position: relative;
     min-height: 100vh;
+    width: 100vw;
+    overflow: hidden;
     font-size: 16px;
     font-family: var(--main-font-family);
 }
@@ -79,13 +81,14 @@ input[type=checkbox]#inventoryCheckBox {
 }
 
 .inventoryContainer {
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 70vw;
     height: 100vh;
     z-index: var(--zindex-per-item-base);
     background-color: var(--block-background-colour);
-    color: var(--block-text-colour)
+    color: var(--block-text-colour);
+    transition: right ease-out 0.25s;
 }
 
 .inventoryItem {
@@ -101,14 +104,20 @@ input[type=checkbox]#inventoryCheckBox:checked + .inventoryContainer {
 }
 
 input[type=checkbox]#inventoryCheckBox label.inventoryCheckBox {
-    position: relative;
+    position: fixed;
     display: block;
     cursor: pointer;
     font-size: 26px;
     background-color: var(--block-background-colour);
     color: var(--text-emphasis-blue);
     padding: var(--margin-standard);
-    right: 100%;
+    right: 0;
+    top: 0;
+    height: 3.5em;
+    width: 3.5em;
+    text-align: center;
+    border-radius: 0 0 0 var(--margin-standard);
+    border: 0.25em solid var(--block-border-colour);
 }
 
 input[type=checkbox]#inventoryCheckBox + .inventoryContainer .inventoryBlockerDiv {
@@ -165,6 +174,8 @@ input[type=radio] {
     background-color: var(--block-background-colour);
     color: var(--block-text-colour);
     font-family: var(--main-font-family);
+    padding: var(--margin-standard);
+    overflow-y: scroll;
 }
 
 i.emphBlue {
@@ -195,12 +206,16 @@ i.emphBold {
     border: 0.25em solid var(--block-border-colour);
     height: 35%;
     width: stretch;
+    padding: var(--margin-standard);
+    border: 0.25rem solid var(--block-border-colour);
 }
 
 .actionBtn {
-    width: 32em;
-    height: 24em;
+    width: 18em;
+    height: 14em;
     position: relative;
+    background-color: var(--block-background-colour);
+    color: var(--block-text-colour);
     border: 0.25em solid var(--block-border-colour);
     transition: border-color linear 0.25s;
 }
@@ -210,8 +225,8 @@ i.emphBold {
     left: -0.1em;
     top: -0.1em;
     content: '';
-    border-top: 3em solid var(--block-border-colour);
-    border-right: 3em solid transparent;
+    border-top: 4.5em solid var(--block-border-colour);
+    border-right: 4.5em solid transparent;
     transition: border-color linear 0.25s;
 }
 
@@ -220,17 +235,17 @@ i.emphBold {
     left: -0.15em;
     top: -0.15em;
     content: '';
-    border-top: 3em solid var(--buttonsList-background-colour);
-    border-right: 3em solid transparent;
+    border-top: 4.5em solid var(--buttonsList-background-colour);
+    border-right: 4.5em solid transparent;
     transition: border-color linear 0.25s;
 }
 
 .actionBtn:hover {
     border: 0.1em solid var(--highlight-border-colour);
 }
-    
+
 .actionBtn:hover:before {
-    border-top: 3em solid var(--highlight-border-colour);
+    border-top: 4.5em solid var(--highlight-border-colour);
 }
     
 .actionBtn > .title {
@@ -248,7 +263,7 @@ i.emphBold {
 footer {
     height: 5vh;
     text-align: center;
-    font-size: 6px;
+    font-size: 10px;
     font-family: var(--titles-font-family);
     color: var(--main-text-colour);
 }
