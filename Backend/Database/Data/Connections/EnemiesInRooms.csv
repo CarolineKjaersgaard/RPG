@@ -1,1 +1,6 @@
 Id|EnemyId|RoomId
+ScrapTimeline|RogueTimeline|ScrapHeaps
+RuinedTimeline|RogueTimeline|RuinedLife
+RealityGhost|FutureGhost|BrokenReality
+WasteAbomination|MechanicalAbomination|WasteTanks
+IndustrialAbomination|MechanicalAbomination|IndustrialFurnace

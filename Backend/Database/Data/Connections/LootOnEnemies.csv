@@ -1,1 +1,6 @@
 Id|EnemyId|ItemId
+RogueAtomic|RogueTimeline|AtomicBlade
+RoguePlasma|RogueTimeline|PlasmaRifle
+AbominationAtomic|MechanicalAbomination|AtomicBlade
+AbominationBlackHole|MechanicalAbomination|BlackHoleBomb
+GhostBomb|FutureGhost|BlackHoleBomb

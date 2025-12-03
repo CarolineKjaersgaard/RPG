@@ -1,1 +1,8 @@
 Id|ItemId|RoomId
+AtomicFurnace|AtomicBlade|IndustrialFurnace
+BlackHoleFurnace|BlackHoleBomb|IndustrialFurnace
+BlackHoleReality|BlackHoleBomb|BrokenReality
+PlasmaScrap|PlasmaRifle|ScrapHeaps
+AtomicLife|AtomicBlade|RuinedLife
+AtomicWaste|AtomicBlade|WasteTanks
+PlasmaWaste|PlasmaRifle|WasteTanks
