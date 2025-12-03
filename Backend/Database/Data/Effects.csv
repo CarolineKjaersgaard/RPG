@@ -1,4 +1,4 @@
-Id|Title|Description|TypeId|Amount|isActive|isAoe
+EffectId|Title|Description|TypeId|Amount|isActive|isAoe
 Shoot|Shoot|Shooting Something peew pew|Attack|40|true|false
 Fireworks|Fireworks|Wow so pretty|Attack|20|true|true
 Exploding|Explodes|Bum!!!|Attack|30|true|true
@@ -10,4 +10,4 @@ BlackHoleBlast|Black Hole Burst| A hole in reality opens up|Explosion|100|true|t
 MoleculeSlash|Molecular Slash|A blade slices through the air|Physical|20|true|false
 CME|Coronal Mass Ejection|Tension breaking in a magnetic field holding fast impossibly hot gas, flinging it outward|Attack|45|true|false
 Heal|Healing|Replenishes health points|Attack|-120|true|false
-SimpleMelee|Simple Melee Attack|Simple melee attack|Attack|true|false
+SimpleMelee|Simple Melee Attack|Simple melee attack|Attack|100|true|false

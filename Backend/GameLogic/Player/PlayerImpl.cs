@@ -173,5 +173,10 @@ namespace Backend.GameLogic.Player
         {
             maxHealth += amount;
         }
+
+        public void SetCoords(int x, int y)
+        {
+            currentCoords = (x, y);
+        }
     }
 }

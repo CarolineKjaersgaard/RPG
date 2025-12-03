@@ -11,11 +11,11 @@ namespace Backend.GameLogic
         public IRoom CreateRoom(Room roomStats, IGame game, (int, int) coords)
         {
             IRoom room = new RoomImpl(roomStats.Title, true, roomStats.Description, " ", coords);
-            if (roomStats.Effect != null)
+            /*if (roomStats.Effect != null)
             {
                 EffectFactory effectFactory = new EffectFactory();
                 room.SetEffect(effectFactory.CreateEffect(roomStats.Effect));
-            }
+            }*/
             List<Enemy> roomEnemies = new List<Enemy>();
             List<Enemy> enemies = game.GetEnemies();
             int totalEnemyDifficulty = 0;

@@ -24,5 +24,7 @@ public interface IGame
 
     public List<Item> GetItems();
 
+    public Item GetRandomItem();
+
     public Dictionary<(int, int), IRoom> GetMap();
 }

@@ -12,9 +12,9 @@ namespace Backend.Database.Tables {
     public int MaxDoors {get; set;}
     public int Rarity { get; set; }
     public int Difficulty {get; set;}
-    public string? EffectId {get; set;}
-    public required RoomType Type {get; set;}
-    public Effect? Effect {get; set;}
+    public string? RoomEffectId {get; set;}
+    public RoomType? Type {get; set;}
+    //public Effect? Effect {get; set;}
     public ICollection<LootInRoom>? Loot {get; set;}
     public ICollection<EnemyInRoom>? Enemies {get; set;}
 
