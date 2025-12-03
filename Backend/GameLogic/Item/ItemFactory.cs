@@ -19,7 +19,7 @@ namespace Backend.GameLogic.ItemImpl
                 }
             }
             
-            IItem item = new ItemImpl(itemStats.Title, itemStats.Description, itemStats.Rarity, " ", itemStats.Type.Title, itemStats.isLootable, effectImpls);
+            IItem item = new ItemImpl(itemStats.Title, itemStats.Description, itemStats.Rarity, " ", "item", itemStats.isLootable, effectImpls);
             return item;
         }
     }

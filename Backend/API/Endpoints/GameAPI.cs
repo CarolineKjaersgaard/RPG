@@ -13,13 +13,11 @@ namespace API;
 [Route("[controller]")]
 public class GameAPI : ControllerBase, IGameAPI
 {
-    public static IGame game;
-    public static Database database;
-
+    
+    public static Database database = new Database();
+    public static IGame game = new Game(database);
     public GameAPI()
     {
-        database = new Database();
-        game = new Game(database);
     }
 
     [HttpPost(Name = "StartGame")]
@@ -37,7 +35,7 @@ public class GameAPI : ControllerBase, IGameAPI
     }
 
     [HttpPut(Name = "EnterRoom")]
-    public IActionResult EnterRoom(int x, int y)
+    public IActionResult EnterRoom(int x=0, int y=0)
     {
         (IRoom, bool) res = game.EnterRoom((x, y));
         RoomImpl room = (RoomImpl)res.Item1;

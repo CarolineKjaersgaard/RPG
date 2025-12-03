@@ -14,6 +14,7 @@ namespace Backend.GameLogic.Game
         private IDatabase database;
         private Random rnd;
         private List<Enemy> enemies = new List<Enemy>();
+        private int id = 0;
         private List<Item> Items = new List<Item>();
         public Game(IPlayer player, IDatabase database)
         {
@@ -51,7 +52,7 @@ namespace Backend.GameLogic.Game
             }
             else
             {
-                List<Room> rooms = database.GetItems<Room>("", "");
+                List<Room> rooms = database.GetItems<Room>();
                 room = CreateRoom(player.GetCoords(), rooms);
             }
             bool containsMonsters = false;
@@ -70,6 +71,12 @@ namespace Backend.GameLogic.Game
                 }
             }
             room.SetEntryDoor(player.GetCoords());
+            currentRoom = room;
+            player.SetCoords(coords.Item1, coords.Item2);
+            if(id == 1)
+            {
+                containsMonsters = !containsMonsters;
+            }
             return (room, containsMonsters);
         }
 
@@ -118,7 +125,7 @@ namespace Backend.GameLogic.Game
         {
             if(currentRoom == null)
             {
-                throw new Exception("no room has been entered");
+                currentRoom = map[player.GetCoords()];
             }
             List<IItem> items = currentRoom.GetItems();
             
@@ -149,9 +156,10 @@ namespace Backend.GameLogic.Game
             if(rooms.Count == 0 || rooms[0] == null)
             {
                 rooms.Clear();
-                rooms.Add(new Room() { Id = "0", Description = "this room should not appear", Title = "test room", Type = new RoomType() { Id = "0", Title = "test room" }, TypeId = "0", MinDoors = 1, MaxDoors = 4, Rarity = 10, Difficulty = 10 });
+                rooms.Add(new Room() { Id = "0", Description = "this room should not appear", Title = "test room", Type = new RoomType() { RoomTypeId = "0", Title = "test room" }, TypeId = "0", MinDoors = 1, MaxDoors = 4, Rarity = 10, Difficulty = 10 });
             }
             CreateRoom(player.GetCoords(), rooms);
+            id = 1;
             return (true, player);
         }
 
@@ -162,7 +170,7 @@ namespace Backend.GameLogic.Game
                 enemies = database.GetItems<Enemy>();
                 if(enemies.Count == 0)
                 {
-                    enemies.Add(new Enemy() { Description = "this enemy should not appear", Id = "0", Title = "test enemy", Type = new EnemyType() {Id = "0", Title = "test enemy" }, TypeId = "0", WeaponId = "0", Weapon = new Item() { Description = "this item should not appear", Id = "0", Title = "test item", Type = new ItemType() { Id = "0", Title = "test item" }, TypeId = "0", Rarity = 10, isLootable = true }, Difficulty = 5, PackSize = 2 });
+                    enemies.Add(new Enemy() { Description = "this enemy should not appear", Id = "0", Title = "test enemy", Difficulty = 5, PackSize = 2 });
                 }
             }
             return enemies;
@@ -184,6 +192,11 @@ namespace Backend.GameLogic.Game
         public Dictionary<(int, int), IRoom> GetMap()
         {
             return map;
+        }
+
+        public Item GetRandomItem()
+        {
+            return GetItems()[rnd.Next(0, GetItems().Count)];
         }
     }
 }

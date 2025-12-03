@@ -12,7 +12,7 @@ namespace Backend.GameLogic.Entity
         {
             List<IItem> items = new List<IItem>();
             IItemFactory itemFactory = new ItemFactory();
-            items.Add(itemFactory.Create(enemyStats.Weapon, game));
+            items.Add(itemFactory.Create(game.GetRandomItem(), game));
             if(enemyStats.Loot != null)
             {
                 foreach (LootOnEnemy item in enemyStats.Loot)
@@ -21,7 +21,7 @@ namespace Backend.GameLogic.Entity
                 }
             }
             
-            IEntity entity = new EntityImpl(enemyStats.Type.Title, 10, enemyStats.Title, 0, enemyStats.Title, enemyStats.Description, " ", 0, items, 10);
+            IEntity entity = new EntityImpl("enemy", 10, enemyStats.Title, 0, enemyStats.Title, enemyStats.Description, " ", 0, items, 10);
             return entity;
         }
     }

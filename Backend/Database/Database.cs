@@ -29,7 +29,9 @@ namespace Backend.Database
             Console.WriteLine("*-*--------makes context----------*-*");
             var options = new DbContextOptionsBuilder<Context>()
                 .UseSqlite("Data Source=database.db")
+                .EnableSensitiveDataLogging()
                 .Options;
+                
             _context = new Context(options);
             _context.Database.EnsureCreated();
 

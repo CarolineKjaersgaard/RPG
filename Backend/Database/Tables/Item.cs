@@ -14,7 +14,8 @@ namespace Backend.Database.Tables {
     public required ItemType Type {get; set;}
     public Effect? Effect {get; set;}
     public ICollection<LootInRoom>? Rooms {get; set;}
-    public ICollection<LootOnEnemy>? Enemies {get; set;}
+    public ICollection<LootOnEnemy>? LootOnEnemies {get; set;}
+    //public ICollection<Enemy>? Enemies {get; set;}
 
 }
 }

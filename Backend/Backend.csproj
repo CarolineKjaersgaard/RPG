@@ -1,10 +1,60 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Database\Data\Connections\EnemiesInRooms.csv" />
+    <None Remove="Database\Data\Connections\LootInRooms.csv" />
+    <None Remove="Database\Data\Connections\LootOnEnemies.csv" />
+    <None Remove="Database\Data\Effects.csv" />
+    <None Remove="Database\Data\Enemies.csv" />
+    <None Remove="Database\Data\Items.csv" />
+    <None Remove="Database\Data\Rooms.csv" />
+    <None Remove="Database\Data\Types\EffectTypes.csv" />
+    <None Remove="Database\Data\Types\EnemyTypes.csv" />
+    <None Remove="Database\Data\Types\ItemTypes.csv" />
+    <None Remove="Database\Data\Types\RoomTypes.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Database\Data\Connections\EnemiesInRooms.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\Data\Connections\LootInRooms.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\Data\Connections\LootOnEnemies.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\Data\Effects.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\Data\Enemies.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\Data\Items.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\Data\Rooms.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\Data\Types\EffectTypes.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\Data\Types\EnemyTypes.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\Data\Types\ItemTypes.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database\Data\Types\RoomTypes.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
