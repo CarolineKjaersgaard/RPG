@@ -2,3 +2,5 @@ Id|Title|Description|TypeId|Rarity|isLootable|EffectId
 Bomb|Bomb|Can explode|Weapon|3|False|Exploding
 CME|Coronal Mass Ejection|An effect-bound item reserved for the living star enemy type|Weapon|0|false|CME
 Laser|Laser Rifle|A high-powered, quick-release laser emitter in a shoulder-braced casing, able to focus its energy on a distant spot|Weapon|5|true|Shoot
+HealItem|Armour Repair Kit|Holds additional armour plating complete with automatically recircuiting electronics. Also effectively staunches active bleeding.|HealItem|4|true|Heal
+Arm|Robotic Arm|A severed cybernetic prosthesis. Can be used as a weapon if you're creative enough.|Weapon|1|true|SimpleMelee
