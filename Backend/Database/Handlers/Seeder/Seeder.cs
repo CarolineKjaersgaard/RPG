@@ -13,6 +13,7 @@ namespace Backend.Database.Handlers
         }
         public void SeedRoomTypes(string filePath)
         {
+            Console.WriteLine("*-*--------trying to seed----------*-*");
             List<RoomType> rows = _parser.Parse<RoomType>(filePath);
             foreach (var row in rows)
             {
@@ -20,6 +21,7 @@ namespace Backend.Database.Handlers
                 if (existing == null)
                 {
                     _context.RoomTypes.Add(row);
+                    Console.WriteLine("*-*--------seeding----------*-*");
                 }
                 else
                 {
