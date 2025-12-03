@@ -42,10 +42,10 @@ namespace Backend.Database
             seeder.SeedEnemyTypes(_enemyTypesCsv);
             seeder.SeedEffectTypes(_effectTypesCsv);
 
+            seeder.SeedEffects(_effectsCsv);
             seeder.SeedRooms(_roomsCsv);
             seeder.SeedItems(_itemsCsv);
             seeder.SeedEnemies(_enemiesCsv);
-            seeder.SeedEffects(_effectsCsv);
 
             seeder.SeedEnemiesInRooms(_enemiesInRoomsCsv);
             seeder.SeedLootInRooms(_lootInRoomsCsv);
