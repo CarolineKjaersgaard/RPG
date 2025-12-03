@@ -13,6 +13,17 @@ namespace Backend.Database
     public class Database : IDatabase
     {
         public Context _context;
+        public string _roomTypesCsv = "Database/Data/Types/RoomTypes.csv";
+        public string _itemTypesCsv = "Database/Data/Types/ItemTypes.csv";
+        public string _enemyTypesCsv = "Database/Data/Types/EnemyTypes.csv";
+        public string _effectTypesCsv = "Database/Data/Types/EffectTypes.csv";
+        public string _roomsCsv = "Database/Data/Rooms.csv";
+        public string _itemsCsv = "Database/Data/Items.csv";
+        public string _enemiesCsv = "Database/Data/Enemies.csv";
+        public string _effectsCsv = "Database/Data/Effects.csv";
+        public string _enemiesInRoomsCsv = "Database/Data/Connections/EnemiesInRooms.csv";
+        public string _LootInRoomsCsv = "Database/Data/Connections/LootInRooms.csv";
+        public string _LootOnEnemiesCsv = "Database/Data/Connections/LootOnEnemies.csv";
         public Database()
         {
             Console.WriteLine("*-*--------makes context----------*-*");
@@ -27,19 +38,19 @@ namespace Backend.Database
 
             Console.WriteLine("*-*--------calls seeder----------*-*");
             Console.WriteLine(Path.GetFullPath("Database/Data/Types/ItemTypes.csv"));
-            seeder.SeedRoomTypes("Database/Data/Types/RoomTypes.csv");
-            seeder.SeedItemTypes("Database/Data/Types/ItemTypes.csv");
-            seeder.SeedEnemyTypes("Database/Data/Types/EnemyTypes.csv");
-            seeder.SeedEffectTypes("Database/Data/Types/EffectTypes.csv");
+            seeder.SeedRoomTypes(_roomTypesCsv);
+            seeder.SeedItemTypes(_itemTypesCsv);
+            seeder.SeedEnemyTypes(_enemyTypesCsv);
+            seeder.SeedEffectTypes(_effectTypesCsv);
 
-            seeder.SeedRooms("Database/Data/Rooms.csv");
-            seeder.SeedItems("Database/Data/Items.csv");
-            seeder.SeedEnemies("Database/Data/Enemies.csv");
-            seeder.SeedEffects("Database/Data/Effects.csv");
+            seeder.SeedRooms(_roomsCsv);
+            seeder.SeedItems(_itemsCsv);
+            seeder.SeedEnemies(_enemiesCsv);
+            seeder.SeedEffects(_effectsCsv);
 
-            seeder.SeedEnemiesInRooms("Database/Data/Connections/EnemiesInRooms.csv");
-            seeder.SeedLootInRooms("Database/Data/Connections/LootInRooms.csv");
-            seeder.SeedLootOnEnemies("Database/Data/Connections/LootOnEnemies.csv");
+            seeder.SeedEnemiesInRooms(_enemiesInRoomsCsv);
+            seeder.SeedLootInRooms(_LootInRoomsCsv);
+            seeder.SeedLootOnEnemies(_LootOnEnemiesCsv);
         }
         public Table GetItem<Table>() where Table: class, ITable
         {    
