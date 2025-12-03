@@ -10,5 +10,7 @@ namespace Backend.GameLogic.EffectImpl
 
         public bool IsPassive();
         public string GetName();
+
+        public Dictionary<string, object> GetDictionaryReresentation();
     }
 }

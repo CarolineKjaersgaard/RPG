@@ -33,6 +33,18 @@ namespace Backend.GameLogic.EffectImpl.ActiveEffect
             return true;
         }
 
+        public Dictionary<string, object> GetDictionaryReresentation()
+        {
+            Dictionary<string, object> dictionaryRepresentation = new Dictionary<string, object>()
+            {
+                { "title", title },
+                {"description", desc },
+                {"healing", baseHeal + healMod},
+                {"isAOE", isAOE }
+            };
+            return dictionaryRepresentation;
+        }
+
         public string GetName()
         {
             return title;

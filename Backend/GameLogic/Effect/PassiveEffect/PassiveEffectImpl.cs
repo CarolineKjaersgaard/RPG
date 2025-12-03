@@ -72,5 +72,15 @@ namespace Backend.GameLogic.EffectImpl.PassiveEffect
             }
             
         }
+
+        public Dictionary<string, object> GetDictionaryReresentation()
+        {
+            Dictionary<string, object> dictionaryRepresentation = new Dictionary<string, object>()
+            {
+                { "title", title },
+                {"description", desc }
+            };
+            return dictionaryRepresentation;
+        }
     }
 }

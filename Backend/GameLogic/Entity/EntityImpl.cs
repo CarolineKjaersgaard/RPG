@@ -113,7 +113,11 @@ namespace Backend.GameLogic.Entity
         {
             Dictionary<string, object> dictionaryRepresentation = new Dictionary<string, object>()
             {
-                {"Name", name}
+                {"Name", name},
+                {"description", Desc },
+                {"MaxHp", maxHealth },
+                {"hp", health },
+                {"last action", lastAction }
             };
             return dictionaryRepresentation;
         }
