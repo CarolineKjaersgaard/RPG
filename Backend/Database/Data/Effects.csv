@@ -2,5 +2,6 @@ Id|Title|Description|TypeId|Amount|isActive|isAoe
 Shoot|Shoot|Shooting Something peew pew|Attack|40|True|False
 Fireworks|Fireworks|Wow so pretty|Attack|20|True|True
 Exploding|Explodes|Bum!!!|Attack|30|True|True
-CME|Coronal Mass Ejection|Tension breaking in a magnetic field holding fast impossibly hot gas, flinging it outward|Attack|1|true|false
+CME|Coronal Mass Ejection|Tension breaking in a magnetic field holding fast impossibly hot gas, flinging it outward|Attack|45|true|false
 Heal|Healing|Replenishes health points|Attack|-120|true|false
+SimpleMelee|Simple Melee Attack|Simple melee attack|Attack|true|false
