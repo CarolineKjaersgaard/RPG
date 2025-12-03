@@ -10,8 +10,8 @@ public class DatabaseTest
     public void GetItemFromId_ReturnsItem()
     {
         Database db = new Database();
-        Enemy enemy = db.GetItem<Enemy>("ExplodingAlien");
+        Enemy enemy = db.GetItem<Enemy>("ItemIdTest");
         
-        Assert.Equal("Alien shaped like a bomb", enemy.Title);
+        Assert.Equal("ItemTitleTest", enemy.Title);
     }
 }
