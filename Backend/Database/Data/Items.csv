@@ -1,1 +1,6 @@
 Id|Title|Description|TypeId|Rarity|isLootable|EffectId
+AtomicBlade|Atomic Blade|A blade with its edge sharpened to a single atom, allowing it to slice through molecules.|Melee|Medium|True|MoleculeSlash
+PlasmaRifle|Plasma Rifle|A simple plasma rifle. Well-used but cared for and in good condition.|Ranged|Low|True|PlasmaShot
+SpaceTimeClaws|Space-Time Claws|Strange claws constructed from collapsed space-time through unknown means.|Melee|High|False|RendingSwipe
+GhostlyWhispers|Ghostly Whispers|Ghostly whispers of a long dead race.|Other|High|False|MindAttack
+BlackHoleBomb|Black Hole Bomb|A dangerous weapon that creates a black hole when thrown.|Explosive|High|True|BlackHoleBlast
