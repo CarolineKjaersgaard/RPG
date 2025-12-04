@@ -1,11 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Combat";
 }
+@model Frontend.Controllers.Enemy
 
 <div style="display: flex">
     <div class="game-container" style="overflow-y: scroll; height: 400px; width: 800px;">
+        <h3 class="game-text">@Model.Name</h3>
         <p class="game-text">
-
+            @Html.Raw(Model.FlavorText)
         </p>
     </div>
     <div class="combat-log" style="overflow-y: scroll; height: 400px; width: 300px;" id="CombatLog">
@@ -30,6 +32,7 @@
           .then(res => res.json())
           .then(data => {
               logText.textContent += data.log + "\n";
+              logText.textContent += data.logReturn + "\n";
               combatLog.scrollTop = combatLog.scrollHeight;
           });
     });

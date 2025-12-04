@@ -17,6 +17,19 @@
     text-shadow: 0 0 5px lightskyblue, 0 0 10px lightskyblue;
 }
 
+.open-inventory-button {
+    width: 100px;
+    height: 50px;
+    display: block;
+    border-radius: 10px;
+    background: black;
+    color: lightskyblue;
+    border: 2px solid lightskyblue;
+    font-size: 20px;
+    box-shadow: 0 0 5px lightskyblue, 0 0 10px lightskyblue;
+    text-shadow: 0 0 5px lightskyblue, 0 0 10px lightskyblue;
+}
+
 .game-body {
     background-color: black;
 }
@@ -40,6 +53,7 @@
 }
 
 .button-row {
+    flex: 1;
     display: flex;
     justify-content: space-between; /* Equal space between buttons and edges */
     padding: 0 20px; /* Optional: space between buttons and screen edges */

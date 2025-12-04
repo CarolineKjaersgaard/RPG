@@ -1,24 +1,100 @@
 ﻿@{
     ViewData["Title"] = "Exploration";
 }
+@model Frontend.Controllers.Room
 
 <div class="game-container" style="overflow-y: scroll; height: 400px;">
+    <h3 class="game-text">@Model.Name</h3>
     <p class="game-text">
-
+        @Html.Raw(Model.FlavorText)
     </p>
 </div>
 
 <div class="button-row">
     <form asp-controller="Game" asp-action="Continue" method="post">
-        <button type="submit" style="margin: 0 auto" class="game-action-button">Next Room</button>
+        <button type="submit" class="game-action-button">Next Room</button>
     </form>
     <form asp-controller="Game" asp-action="Explore" method="post">
-        <button type="submit" style="margin: 0 auto" class="game-action-button">Explore</button>
+        <button type="submit" class="game-action-button">Explore</button>
     </form>
-    <form asp-controller="Game" asp-action="Loot" method="post">
+    <button type="submit" class="game-action-button" onclick="openLooting()">Loot</button>
+    @* <form asp-controller="Game" asp-action="Loot" method="post">
         <button type="submit" style="margin: 0 auto" class="game-action-button">Loot</button>
-    </form>
-    <form asp-controller="Game" asp-action="Rest" method="post">
+    </form> *@
+    <button type="submit" class="game-action-button" onclick="openResting()">Rest</button>
+    @* <form asp-controller="Game" asp-action="Rest" method="put">
         <button type="submit" style="margin: 0 auto" class="game-action-button">Rest</button>
-    </form>
+    </form> *@
 </div>
+
+<div>
+    <button id="OpenInventoryBtn" onclick="openPartial()" style="margin: 0 auto" class="open-inventory-button">Inventory</button>
+</div>
+
+<div class="modal fade" id="inventoryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: black;">
+                <h5 class="modal-title game-text">Inventory</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body game-body" id="ModalInventoryContent">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="restModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: black;">
+                <h5 class="modal-title game-text">Resting</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body game-body" id="ModalRestContent">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="lootModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background: black;">
+                <h5 class="modal-title game-text">Looting</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body game-body" id="ModalLootContent">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function openPartial() {
+            $.get('@Url.Action("LoadPartial", "Game")', function(data) {
+                $('#ModalInventoryContent').html(data); // Insert partial into modal
+                var myModal = new bootstrap.Modal(document.getElementById('inventoryModal'));
+                myModal.show(); // Show the modal
+            });
+        }
+
+        function openResting() {
+            $.get('@Url.Action("RestPartial", "Game")', function(data) {
+                $('#ModalRestContent').html(data); // Insert partial into modal
+                var myModal = new bootstrap.Modal(document.getElementById('restModal'));
+                myModal.show(); // Show the modal
+            });
+        }
+
+        function openLooting() {
+            $.get('@Url.Action("LootPartial", "Game")', function(data) {
+                $('#ModalLootContent').html(data); // Insert partial into modal
+                var myModal = new bootstrap.Modal(document.getElementById('lootModal'));
+                myModal.show(); // Show the modal
+            });
+        }
+    </script>
+}

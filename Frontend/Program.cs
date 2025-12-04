@@ -10,7 +10,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IGameAPI, GameAPI>();
 builder.Services.AddScoped<IGame, Game>();
 builder.Services.AddScoped<IPlayer, PlayerImpl>();
-builder.Services.AddScoped<IDatabase, Database>();
+builder.Services.AddSingleton<IDatabase, Database>();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -22,6 +23,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseRouting();
 
