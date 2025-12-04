@@ -14,7 +14,6 @@ namespace Backend.GameLogic.Game
         private IDatabase database;
         private Random rnd;
         private List<Enemy> enemies = new List<Enemy>();
-        private int id = 0;
         private List<Item> Items = new List<Item>();
         public Game(IPlayer player, IDatabase database)
         {
@@ -73,10 +72,6 @@ namespace Backend.GameLogic.Game
             room.SetEntryDoor(player.GetCoords());
             currentRoom = room;
             player.SetCoords(coords.Item1, coords.Item2);
-            if(id == 1)
-            {
-                containsMonsters = !containsMonsters;
-            }
             return (room, containsMonsters);
         }
 
@@ -159,7 +154,6 @@ namespace Backend.GameLogic.Game
                 rooms.Add(new Room() { Id = "0", Description = "this room should not appear", Title = "test room", Type = new RoomType() { RoomTypeId = "0", Title = "test room" }, TypeId = "0", MinDoors = 1, MaxDoors = 4, Rarity = 10, Difficulty = 10 });
             }
             CreateRoom(player.GetCoords(), rooms);
-            id = 1;
             return (true, player);
         }
 
