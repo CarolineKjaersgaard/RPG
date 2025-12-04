@@ -70,7 +70,7 @@ namespace Backend.GameLogic
         {
             if (GetMonsters().Count == 0)
             {
-                throw new Exception("no monsters");
+                return new Dictionary<string, object>();
             }
             Dictionary<string, object> enemyDisplayList = new Dictionary<string, object>();
             foreach(IEntity entity in monsters)
