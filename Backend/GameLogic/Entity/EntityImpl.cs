@@ -24,7 +24,7 @@ namespace Backend.GameLogic.Entity
         List<IItem> loot = new List<IItem>();
         List<IItem> weapon = new List<IItem>();
         Dictionary<string, IEffect> effects = new Dictionary<string, IEffect>();
-
+        bool looted = false;
         public EntityImpl(string type, int health, string name, int damageMod, string title, string desc, string icon, int damageReduction, List<IItem> items, int defense)
         {
             this.type = type;
@@ -134,7 +134,16 @@ namespace Backend.GameLogic.Entity
 
         public List<IItem> GetItems()
         {
-            return loot;
+            if(!looted)
+            {
+                looted = true;
+                return loot;
+            }
+            else
+            {
+                return new List<IItem>();
+            }
+            
         }
 
         public int GetMaxHealth()
