@@ -1,6 +1,6 @@
 @Backend_HostAddress = http://localhost:5125
  
-Post {{Backend_HostAddress}}/GameAPI/
+GET {{Backend_HostAddress}}/GameAPI/
 Accept: application/json
 
 ###

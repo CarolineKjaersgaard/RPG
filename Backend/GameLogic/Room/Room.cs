@@ -18,6 +18,7 @@ namespace Backend.GameLogic
         List<IEntity> monsters = new List<IEntity>();
         List<IItem> items = new List<IItem>();
         (int, int) coords;
+        bool looted = false;
 
         public RoomImpl(string title, bool isUnlocked, string desc, string image, (int, int) coords)
         {
@@ -35,7 +36,15 @@ namespace Backend.GameLogic
 
         public List<IItem> GetItems()
         {
-            return items;
+            if(!looted)
+            {
+                looted = true;
+                return items;
+            }
+            else
+            {
+                return new List<IItem>();
+            }
         }
 
         public List<IEntity> GetMonsters()
