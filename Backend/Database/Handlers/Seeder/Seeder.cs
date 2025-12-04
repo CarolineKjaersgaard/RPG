@@ -15,7 +15,6 @@ namespace Backend.Database.Handlers
         }
         public void SeedRoomTypes(string filePath)
         {
-            Console.WriteLine("*-*--------trying to seed----------*-*");
             IEnumerable<RoomType> rows = _parser.Parse<RoomType>(filePath);
             foreach (var row in rows)
             {
@@ -23,7 +22,6 @@ namespace Backend.Database.Handlers
                 if (existing == null)
                 {
                     _context.RoomTypes.Add(row);
-                    Console.WriteLine("*-*--------seeding----------*-*");
                 }
                 else
                 {
@@ -109,16 +107,6 @@ namespace Backend.Database.Handlers
                 IEnumerable<Room> rows = _parser.Parse<Room>(filePath);
                 foreach (var row in rows)
                 {
-                    /*if(row.RoomEffectId != "None")
-                    {
-                        var effect = _context.Effects.Find(row.RoomEffectId);
-                        row.Effect = effect;
-                    }
-                    else
-                    {
-                        row.Effect = null;
-                        row.RoomEffectId = "";
-                    }*/
                     var roomType = _context.RoomTypes.Find(row.TypeId);
                     row.Type = roomType;
                     var existing = _context.Rooms.Find(row.Id);
