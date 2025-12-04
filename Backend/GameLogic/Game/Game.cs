@@ -57,11 +57,11 @@ namespace Backend.GameLogic.Game
             }
             bool containsMonsters = false;
             List<IEntity> monsters = room.GetMonsters();
-            /*if(coords == (0,0) && monsters.Count > 0)
+            if(coords == (0,0) && monsters.Count > 0)
             {
                 room.GetMonsters().Clear();
                 monsters.Clear();
-            }*/
+            }
             foreach(IEntity monster in monsters)
             {
                 if(monster.GetHealth() > 0)
