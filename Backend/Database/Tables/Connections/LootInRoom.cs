@@ -4,11 +4,11 @@ using System.Data;
 namespace Backend.Database.Tables {
     public class LootInRoom : ITable
 {
-    public required string Id { get; set; }
-    public required string ItemId { get; set; }
-    public required string RoomId { get; set; }
-    public required Item Item {get; set;}
-    public required Room Room {get; set;}
+    public string Id { get; set; } = "";
+    public string ItemId { get; set; } = "";
+    public string RoomId { get; set; } = "";
+    public Item? Item {get; set;}
+    public Room? Room {get; set;}
 
 }
 }

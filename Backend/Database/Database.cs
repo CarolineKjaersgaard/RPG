@@ -51,6 +51,45 @@ namespace Backend.Database
             seeder.SeedLootInRooms(_lootInRoomsCsv);
             seeder.SeedLootOnEnemies(_lootOnEnemiesCsv);
         }
+        public Database(string rooms, string items, string effects, string enemies, string enemyTypes, string itemTypes, string roomTypes, string effectTypes, string lootInRooms, string lootOnEnemies, string enemiesInRooms)
+        {
+            _roomsCsv = rooms;
+            _itemsCsv = items;
+            _effectsCsv = effects;
+            _enemiesCsv = enemies;
+            _enemyTypesCsv = enemyTypes;
+            _roomTypesCsv = roomTypes;
+            _effectTypesCsv = effectTypes;
+            _itemTypesCsv = itemTypes;
+            _lootInRoomsCsv = lootInRooms;
+            _lootOnEnemiesCsv = lootOnEnemies;
+            _enemiesInRoomsCsv = enemiesInRooms;
+
+            Console.WriteLine("*-*--------makes context----------*-*");
+            var options = new DbContextOptionsBuilder<Context>()
+                .UseSqlite("Data Source=database.db")
+                .Options;
+            _context = new Context(options);
+            _context.Database.EnsureCreated();
+
+            Parser parser = new Parser();
+            Seeder seeder = new Seeder(_context, parser);
+
+            Console.WriteLine("*-*--------calls seeder----------*-*");
+            seeder.SeedRoomTypes(_roomTypesCsv);
+            seeder.SeedItemTypes(_itemTypesCsv);
+            seeder.SeedEnemyTypes(_enemyTypesCsv);
+            seeder.SeedEffectTypes(_effectTypesCsv);
+
+            seeder.SeedEffects(_effectsCsv);
+            seeder.SeedRooms(_roomsCsv);
+            seeder.SeedItems(_itemsCsv);
+            seeder.SeedEnemies(_enemiesCsv);
+
+            seeder.SeedEnemiesInRooms(_enemiesInRoomsCsv);
+            seeder.SeedLootInRooms(_lootInRoomsCsv);
+            seeder.SeedLootOnEnemies(_lootOnEnemiesCsv);
+        }
         public Table GetItem<Table>() where Table: class, ITable
         {    
             var item = _context.Set<Table>().OrderBy(e => EF.Functions.Random()).FirstOrDefault();
