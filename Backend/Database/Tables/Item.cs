@@ -15,7 +15,6 @@ namespace Backend.Database.Tables {
     public Effect? Effect {get; set;}
     public ICollection<LootInRoom>? Rooms {get; set;}
     public ICollection<LootOnEnemy>? LootOnEnemies {get; set;}
-    //public ICollection<Enemy>? Enemies {get; set;}
 
 }
 }

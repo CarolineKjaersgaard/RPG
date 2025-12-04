@@ -26,7 +26,6 @@ namespace Backend.Database
         public string _lootOnEnemiesCsv = "Database/Data/Connections/LootOnEnemies.csv";
         public Database()
         {
-            Console.WriteLine("*-*--------makes context----------*-*");
             var options = new DbContextOptionsBuilder<Context>()
                 .UseSqlite("Data Source=database.db")
                 .EnableSensitiveDataLogging()
@@ -38,7 +37,6 @@ namespace Backend.Database
             Parser parser = new Parser();
             Seeder seeder = new Seeder(_context, parser);
 
-            Console.WriteLine("*-*--------calls seeder----------*-*");
             seeder.SeedRoomTypes(_roomTypesCsv);
             seeder.SeedItemTypes(_itemTypesCsv);
             seeder.SeedEnemyTypes(_enemyTypesCsv);

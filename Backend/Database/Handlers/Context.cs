@@ -57,10 +57,5 @@ namespace Backend.Database.Handlers
             //modelBuilder.Entity<EnemyType>().HasMany(e => e.Enemies).WithOne(t => t.Type).HasForeignKey(t => t.TypeId);
             modelBuilder.Entity<EffectType>().HasMany(e => e.Effects).WithOne(t => t.Type).HasForeignKey(t => t.TypeId);
         }
-
-        public DbSet<Room> GetSet()
-        {
-            return Rooms;
-        }
     }
 }
